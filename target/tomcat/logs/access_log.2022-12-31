@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 0:0:0:0:0:0:0:1 - - [31/Dec/2022:00:00:21 -0500] "GET /hay/AddProfile.jsp HTTP/1.1" 200 6710 http-bio-9090-exec-7 45
 0:0:0:0:0:0:0:1 - - [31/Dec/2022:00:01:02 -0500] "GET /hay/ HTTP/1.1" 200 1241 http-bio-9090-exec-8 83
 0:0:0:0:0:0:0:1 - - [31/Dec/2022:00:01:05 -0500] "POST /hay/Navigator HTTP/1.1" 200 1590 http-bio-9090-exec-9 53
@@ -26,3 +27,9 @@
 0:0:0:0:0:0:0:1 - - [31/Dec/2022:00:19:22 -0500] "POST /hay/Navigator HTTP/1.1" 200 1590 http-bio-9090-exec-5 59
 0:0:0:0:0:0:0:1 - - [31/Dec/2022:00:19:24 -0500] "GET /hay/SearchProfile.jsp HTTP/1.1" 200 3400 http-bio-9090-exec-5 2
 0:0:0:0:0:0:0:1 - - [31/Dec/2022:00:19:27 -0500] "POST /hay/Navigator HTTP/1.1" 200 6596 http-bio-9090-exec-5 222
+=======
+0:0:0:0:0:0:0:1 - - [31/Dec/2022:01:04:56 -0500] "GET /hay/ HTTP/1.1" 200 1241 http-bio-9090-exec-1 1020
+0:0:0:0:0:0:0:1 - - [31/Dec/2022:01:04:56 -0500] "GET /hay/css/style.css HTTP/1.1" 304 - http-bio-9090-exec-2 10
+0:0:0:0:0:0:0:1 - - [31/Dec/2022:01:04:59 -0500] "POST /hay/Navigator HTTP/1.1" 200 1590 http-bio-9090-exec-3 178
+0:0:0:0:0:0:0:1 - - [31/Dec/2022:01:05:01 -0500] "GET /hay/SearchProfile.jsp HTTP/1.1" 200 2550 http-bio-9090-exec-4 840
+>>>>>>> a74ccfe (test)
