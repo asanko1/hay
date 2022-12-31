@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -101,6 +102,23 @@ public class PrimaryController extends HttpServlet {
 					rd = request.getRequestDispatcher("/index.jsp?e=login_fail");
 					rd.forward(request, response);
 
+				}
+			}
+			else if(form_id.equals("searchprof")){
+
+				mp=new ManageProfile();
+				ArrayList<Profile> profiles=new ArrayList<Profile>();
+				System.out.println(request.getParameter("search_by"));
+				System.out.println(request.getParameter("search_val"));
+				profiles=mp.searchProfile(request.getParameter("search_by"),request.getParameter("search_val"));
+				if(profiles.size()>0){
+					session.setAttribute("profiles",profiles);
+					rd = request.getRequestDispatcher("/SearchProfile.jsp?msg=found_profile");
+					rd.forward(request, response);
+				}
+				else {
+					rd = request.getRequestDispatcher("/SearchProfile.jsp?msg=found_no_profile");
+					rd.forward(request, response);
 				}
 			}
 		}

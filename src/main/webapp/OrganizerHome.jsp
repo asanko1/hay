@@ -24,7 +24,7 @@
 				<button class="dropbtn">Profile</button>
 				<div class="dropdown-content">
 					<a href="AddProfile.jsp">Add New Profile</a>
-					<a href="#">Manage Profile</a> 
+					<a href="SearchProfile.jsp">Manage Profile</a>
 					
 				</div>
 			</div>
