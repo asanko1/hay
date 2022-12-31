@@ -122,7 +122,7 @@ public class ProfileCreateController extends HttpServlet implements FilePath{
 					else if(fieldName.equals("exemp_flg")){
 						pf.setExemp_flg(value);
 					}
-					else if(fieldName.equals("exempid")){
+					else if(fieldName.equals("exempid") && !(value.equals("Enter old employee id"))){
 						pf.setExemp_id(value);
 					}
 					else if(fieldName.equals("gender")){

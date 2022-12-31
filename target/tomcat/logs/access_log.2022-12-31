@@ -33,3 +33,21 @@
 0:0:0:0:0:0:0:1 - - [31/Dec/2022:01:04:59 -0500] "POST /hay/Navigator HTTP/1.1" 200 1590 http-bio-9090-exec-3 178
 0:0:0:0:0:0:0:1 - - [31/Dec/2022:01:05:01 -0500] "GET /hay/SearchProfile.jsp HTTP/1.1" 200 2550 http-bio-9090-exec-4 840
 >>>>>>> a74ccfe (test)
+0:0:0:0:0:0:0:1 - - [31/Dec/2022:01:12:16 -0500] "GET /hay/ HTTP/1.1" 200 1241 http-bio-9090-exec-1 356
+0:0:0:0:0:0:0:1 - - [31/Dec/2022:01:12:19 -0500] "POST /hay/Navigator HTTP/1.1" 200 1590 http-bio-9090-exec-2 173
+0:0:0:0:0:0:0:1 - - [31/Dec/2022:01:12:22 -0500] "GET /hay/SearchProfile.jsp HTTP/1.1" 200 3400 http-bio-9090-exec-3 752
+0:0:0:0:0:0:0:1 - - [31/Dec/2022:01:12:24 -0500] "POST /hay/Navigator HTTP/1.1" 200 6845 http-bio-9090-exec-4 262
+0:0:0:0:0:0:0:1 - - [31/Dec/2022:01:14:03 -0500] "GET /hay/ HTTP/1.1" 200 1241 http-bio-9090-exec-1 388
+0:0:0:0:0:0:0:1 - - [31/Dec/2022:01:14:06 -0500] "POST /hay/Navigator HTTP/1.1" 200 1590 http-bio-9090-exec-2 199
+0:0:0:0:0:0:0:1 - - [31/Dec/2022:01:14:09 -0500] "GET /hay/SearchProfile.jsp HTTP/1.1" 200 3400 http-bio-9090-exec-3 12
+0:0:0:0:0:0:0:1 - - [31/Dec/2022:01:14:11 -0500] "POST /hay/Navigator HTTP/1.1" 200 6831 http-bio-9090-exec-4 409
+0:0:0:0:0:0:0:1 - - [31/Dec/2022:01:14:47 -0500] "GET /hay HTTP/1.1" 302 - http-bio-9090-exec-1 0
+0:0:0:0:0:0:0:1 - - [31/Dec/2022:01:14:48 -0500] "GET /hay/ HTTP/1.1" 200 1241 http-bio-9090-exec-2 346
+0:0:0:0:0:0:0:1 - - [31/Dec/2022:01:14:51 -0500] "POST /hay/Navigator HTTP/1.1" 200 1590 http-bio-9090-exec-3 172
+0:0:0:0:0:0:0:1 - - [31/Dec/2022:01:14:53 -0500] "GET /hay/SearchProfile.jsp HTTP/1.1" 200 3400 http-bio-9090-exec-4 11
+0:0:0:0:0:0:0:1 - - [31/Dec/2022:01:14:55 -0500] "POST /hay/Navigator HTTP/1.1" 200 6933 http-bio-9090-exec-5 346
+0:0:0:0:0:0:0:1 - - [31/Dec/2022:01:18:51 -0500] "GET /hay/AddProfile.jsp HTTP/1.1" 200 6702 http-bio-9090-exec-7 314
+0:0:0:0:0:0:0:1 - - [31/Dec/2022:01:19:51 -0500] "POST /hay/Navigator HTTP/1.1" 200 - http-bio-9090-exec-8 263
+0:0:0:0:0:0:0:1 - - [31/Dec/2022:01:21:04 -0500] "POST /hay/Navigator HTTP/1.1" 200 1807 http-bio-9090-exec-10 165
+0:0:0:0:0:0:0:1 - - [31/Dec/2022:01:21:13 -0500] "GET /hay/SearchProfile.jsp HTTP/1.1" 200 3400 http-bio-9090-exec-10 4
+0:0:0:0:0:0:0:1 - - [31/Dec/2022:01:21:15 -0500] "POST /hay/Navigator HTTP/1.1" 200 7367 http-bio-9090-exec-10 343
