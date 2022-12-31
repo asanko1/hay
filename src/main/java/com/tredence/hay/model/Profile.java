@@ -5,7 +5,7 @@ import java.util.Date;
 
 public class Profile {
 	BigInteger profile_id;
-	String  first_name, last_name, profile_sythetic_key,primary_phn, primary_email, sec_phn, sec_email, city, country, source, ref_emp_id, resume, blacklisted, visa_status,linkedin_url,github_url,status,last_updated_by;
+	String  first_name, last_name, profile_sythetic_key,primary_phn, primary_email, sec_phn, sec_email, city, country, source, ref_emp_id, resume, blacklisted, visa_status,linkedin_url,github_url,status,last_updated_by,gender,exemp_flg,exemp_id;
 	Date last_updated;
 	
 	
@@ -15,7 +15,7 @@ public class Profile {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Profile(BigInteger profile_id, String first_name, String last_name, String profile_sythetic_key, String primary_phn, String primary_email, String sec_phn, String sec_email, String city, String country, String source, String ref_emp_id, String resume, String blacklisted, String visa_status, String linkedin_url, String github_url, String status, Date last_updated, String last_updated_by) {
+	public Profile(BigInteger profile_id, String first_name, String last_name, String profile_sythetic_key, String primary_phn, String primary_email, String sec_phn, String sec_email, String city, String country, String source, String ref_emp_id, String resume, String blacklisted, String visa_status, String linkedin_url, String github_url, String status, Date last_updated, String last_updated_by,String gender,String exemp_flg, String exemp_id) {
 		this.profile_id = profile_id;
 		this.first_name = first_name;
 		this.last_name = last_name;
@@ -36,7 +36,35 @@ public class Profile {
 		this.status = status;
 		this.last_updated = last_updated;
 		this.last_updated_by=last_updated_by;
+		this.gender=gender;
+		this.exemp_flg=exemp_flg;
+		this.exemp_id=exemp_id;
 	}
+
+	public String getExemp_flg() {
+		return exemp_flg;
+	}
+
+	public void setExemp_flg(String exemp_flg) {
+		this.exemp_flg = exemp_flg;
+	}
+
+	public String getExemp_id() {
+		return exemp_id;
+	}
+
+	public void setExemp_id(String exemp_id) {
+		this.exemp_id = exemp_id;
+	}
+
+	public String getGender() {
+		return gender;
+	}
+
+	public void setGender(String gender) {
+		this.gender = gender;
+	}
+
 
 	public String getLast_updated_by() {
 		return last_updated_by;

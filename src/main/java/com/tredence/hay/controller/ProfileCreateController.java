@@ -119,6 +119,15 @@ public class ProfileCreateController extends HttpServlet implements FilePath{
 					else if(fieldName.equals("status")){
 						pf.setStatus(value);
 					}
+					else if(fieldName.equals("exemp_flg")){
+						pf.setExemp_flg(value);
+					}
+					else if(fieldName.equals("exempid")){
+						pf.setExemp_id(value);
+					}
+					else if(fieldName.equals("gender")){
+						pf.setGender(value);
+					}
 
 				} else {
 					 resume = uploadItem;

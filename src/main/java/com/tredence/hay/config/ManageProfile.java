@@ -43,6 +43,9 @@ public class ManageProfile {
                 sql = sql.replaceFirst("[?]", (pf.getGithub_url() != null ? "'" + pf.getGithub_url() + "'" : "''"));
                 sql = sql.replaceFirst("[?]", (pf.getStatus() != null ? "'" + pf.getStatus() + "'" : "''"));
                 sql = sql.replaceFirst("[?]", (pf.getLast_updated_by() != null ? "'" + pf.getLast_updated_by() + "'" : "''"));
+                sql = sql.replaceFirst("[?]", (pf.getGender() != null ? "'" + pf.getGender() + "'" : "''"));
+                sql = sql.replaceFirst("[?]", (pf.getExemp_flg() != null ? "'" + pf.getExemp_flg() + "'" : "''"));
+                sql = sql.replaceFirst("[?]", (pf.getExemp_id() != null ? "'" + pf.getExemp_id() + "'" : "''"));
 
                 System.out.println(sql);
                 stmt = conn.createStatement();
