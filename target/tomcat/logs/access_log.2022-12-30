@@ -250,3 +250,10 @@
 0:0:0:0:0:0:0:1 - - [30/Dec/2022:23:32:41 -0500] "POST /hay/Navigator HTTP/1.1" 200 5206 http-bio-9090-exec-10 236
 0:0:0:0:0:0:0:1 - - [30/Dec/2022:23:33:18 -0500] "POST /hay/Navigator HTTP/1.1" 200 5266 http-bio-9090-exec-10 196
 0:0:0:0:0:0:0:1 - - [30/Dec/2022:23:34:00 -0500] "POST /hay/Navigator HTTP/1.1" 200 5226 http-bio-9090-exec-10 206
+0:0:0:0:0:0:0:1 - - [30/Dec/2022:23:45:31 -0500] "GET /hay/AddProfile.jsp HTTP/1.1" 200 5361 http-bio-9090-exec-1 4
+0:0:0:0:0:0:0:1 - - [30/Dec/2022:23:45:31 -0500] "GET /hay/css/style.css HTTP/1.1" 304 - http-bio-9090-exec-1 1
+0:0:0:0:0:0:0:1 - - [30/Dec/2022:23:57:53 -0500] "GET /hay/ HTTP/1.1" 200 1241 http-bio-9090-exec-1 429
+0:0:0:0:0:0:0:1 - - [30/Dec/2022:23:57:53 -0500] "GET /hay/css/style.css HTTP/1.1" 304 - http-bio-9090-exec-2 8
+0:0:0:0:0:0:0:1 - - [30/Dec/2022:23:57:56 -0500] "POST /hay/Navigator HTTP/1.1" 200 1590 http-bio-9090-exec-3 142
+0:0:0:0:0:0:0:1 - - [30/Dec/2022:23:57:59 -0500] "GET /hay/AddProfile.jsp HTTP/1.1" 200 6566 http-bio-9090-exec-4 675
+0:0:0:0:0:0:0:1 - - [30/Dec/2022:23:58:26 -0500] "GET /hay/AddProfile.jsp HTTP/1.1" 200 6580 http-bio-9090-exec-5 68

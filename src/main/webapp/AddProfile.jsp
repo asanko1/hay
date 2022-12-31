@@ -53,11 +53,11 @@
     <br>
         <%if(request.getParameter("u")!=null){%>
                     
-                    <font color="red" size="5">Hi! <%=request.getParameter("u")%></font>
+                    <font color="blue" size="5">Hi! <%=request.getParameter("u")%></font>
                     
         <%}%>
 
-    <br>
+
 	<div style="padding-left: 200px" >
 	
 		<form action="Navigator" method="post" enctype="multipart/form-data">
@@ -135,6 +135,24 @@
                         </td>
                         
                     </tr>
+                    <tr>
+                        <td>Gender</td>
+                        <td>&nbsp;</td>
+                        <td><select name="gender">
+                                <option value="M">Male</option>
+                                <option value="M">Female</option>
+
+                            </select>
+                        </td>
+                        <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                        <td>Ex-Tredence Employee</td>
+                        <td>&nbsp;</td>
+                        <td>
+                            <input type="checkbox" name="exemp_flg" id="exemp_flg" onclick="showexempid()">
+                            <input type="text" name="exempid" id="exempid" style="display:none" value="Enter old employee id" onclick="emptytext()">
+                        </td>
+
+                    </tr>
                     <tr></tr>
                     <tr></tr>
                      <tr>
@@ -150,4 +168,22 @@
 		
 	</div>
 </body>
+<script>
+function showexempid() {
+  // Get the checkbox
+  var checkBox = document.getElementById("exemp_flg");
+  // Get the output text
+  var text = document.getElementById("exempid");
+
+  // If the checkbox is checked, display the output text
+  if (checkBox.checked == true){
+    text.style.display = "block";
+  } else {
+    text.style.display = "none";
+  }
+}
+function emptytext(){
+    document.getElementById("exempid").value = "";
+}
+</script>
 </html>

@@ -113,12 +113,12 @@
     			<table id="example" class="display" style="width:100%">
     			<thead>
     			<tr>
-    				<td>Profile Id</td>
-    				<td>Name</td>
-    				<td>Email</td>
-    				<td>Phone</td>
-    				<td>Status</td>
-    				<td>Action</td>
+    				<td align="center">Profile Id</td>
+    				<td align="center">Name</td>
+    				<td align="center">Email</td>
+    				<td align="center">Phone</td>
+    				<td align="center">Status</td>
+    				<td align="center">Action</td>
     			</tr>
     			</thead>
     			<tbody>
@@ -134,7 +134,11 @@
     				<td align="center">
     						<a href="">Interview Rounds</a> &nbsp;
     						<a href="">Full Profile</a> &nbsp;
+    						<%if(pf.getBlacklisted().equals("Y")){%>
+                                <b>Blacklisted</b>
+    						<%}else{%>
     						<a href="">Blacklist</a> &nbsp;
+    						<%}%>
     				</td>
     			</tr>
     			<%} %>
