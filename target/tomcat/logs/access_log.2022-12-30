@@ -207,3 +207,12 @@
 0:0:0:0:0:0:0:1 - - [30/Dec/2022:22:36:42 -0500] "POST /hay/Navigator HTTP/1.1" 200 2620 http-bio-9090-exec-4 89
 0:0:0:0:0:0:0:1 - - [30/Dec/2022:22:37:41 -0500] "POST /hay/Navigator HTTP/1.1" 200 2620 http-bio-9090-exec-4 95
 0:0:0:0:0:0:0:1 - - [30/Dec/2022:22:37:53 -0500] "POST /hay/Navigator HTTP/1.1" 200 2616 http-bio-9090-exec-4 79
+0:0:0:0:0:0:0:1 - - [30/Dec/2022:22:39:20 -0500] "GET /hay/ HTTP/1.1" 200 1241 http-bio-9090-exec-1 318
+0:0:0:0:0:0:0:1 - - [30/Dec/2022:22:39:23 -0500] "POST /hay/Navigator HTTP/1.1" 200 1590 http-bio-9090-exec-2 139
+0:0:0:0:0:0:0:1 - - [30/Dec/2022:22:39:27 -0500] "GET /hay/SearchProfile.jsp HTTP/1.1" 200 2550 http-bio-9090-exec-4 9
+0:0:0:0:0:0:0:1 - - [30/Dec/2022:22:39:31 -0500] "POST /hay/Navigator HTTP/1.1" 200 3190 http-bio-9090-exec-5 138
+0:0:0:0:0:0:0:1 - - [30/Dec/2022:22:39:36 -0500] "POST /hay/Navigator HTTP/1.1" 200 3556 http-bio-9090-exec-6 171
+0:0:0:0:0:0:0:1 - - [30/Dec/2022:22:42:42 -0500] "GET /hay/tabletest.jsp HTTP/1.1" 200 1380 http-bio-9090-exec-10 681
+0:0:0:0:0:0:0:1 - - [30/Dec/2022:22:43:08 -0500] "GET /hay/tabletest.jsp HTTP/1.1" 200 1406 http-bio-9090-exec-10 36
+0:0:0:0:0:0:0:1 - - [30/Dec/2022:22:45:16 -0500] "GET /hay/tabletest.jsp HTTP/1.1" 200 1454 http-bio-9090-exec-5 24
+0:0:0:0:0:0:0:1 - - [30/Dec/2022:22:45:29 -0500] "GET /hay/tabletest.jsp HTTP/1.1" 200 1499 http-bio-9090-exec-5 38
