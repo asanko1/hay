@@ -108,8 +108,7 @@ public class PrimaryController extends HttpServlet {
 
 				mp=new ManageProfile();
 				ArrayList<Profile> profiles=new ArrayList<Profile>();
-				System.out.println(request.getParameter("search_by"));
-				System.out.println(request.getParameter("search_val"));
+
 				profiles=mp.searchProfile(request.getParameter("search_by"),request.getParameter("search_val"));
 				if(profiles.size()>0){
 					session.setAttribute("profiles",profiles);

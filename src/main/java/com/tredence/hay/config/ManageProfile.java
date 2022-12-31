@@ -117,6 +117,12 @@ public class ManageProfile {
                 pstmt.setString(1,search_val);
                 pstmt.setString(2,search_val);
             }
+            else if (search_by.equals("all")){
+                ms = new ManageSQL();
+                sql = ms.getSQL(BigInteger.valueOf(9));
+                pstmt=conn.prepareStatement(sql);
+
+            }
             rs=pstmt.executeQuery();
             while (rs.next()){
                 pf=new Profile();
