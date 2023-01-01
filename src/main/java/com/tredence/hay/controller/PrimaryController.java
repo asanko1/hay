@@ -1,8 +1,10 @@
 package com.tredence.hay.controller;
 import java.io.*;
 
+import com.tredence.hay.config.ManageOrganizer;
 import com.tredence.hay.config.ManageProfile;
 import com.tredence.hay.config.ManageUsers;
+import com.tredence.hay.model.Organizer;
 import com.tredence.hay.model.Profile;
 import com.tredence.hay.model.Users;
 import javax.servlet.*;
@@ -45,6 +47,8 @@ public class PrimaryController extends HttpServlet {
 	private static final int MEMORY_THRESHOLD = 1024 * 1024 * 3; // 3MB
 	private static final int MAX_FILE_SIZE = 1024 * 1024 * 40; // 40MB
 	private static final int MAX_REQUEST_SIZE = 1024 * 1024 * 50; // 50MB
+	Organizer org;
+	ManageOrganizer mo;
 
 	/**
      * Default constructor. 
@@ -119,6 +123,26 @@ public class PrimaryController extends HttpServlet {
 					rd = request.getRequestDispatcher("/SearchProfile.jsp?msg=found_no_profile");
 					rd.forward(request, response);
 				}
+			}
+			else if(form_id.equals("addorg")){
+				 org=new Organizer();
+				 org.setOrganizer_synthetic_key("Org1");
+				org.setFirst_name(request.getParameter("fname"));
+				org.setLast_name(request.getParameter("lname"));
+				org.setEmail(request.getParameter("email"));
+				org.setPhone(request.getParameter("phn"));
+				org.setCity(request.getParameter("city"));
+				org.setCountry(request.getParameter("country"));
+				org.setDept(request.getParameter("dept"));
+				org.setLeadership_profile(request.getParameter("leadership"));
+				org.setTimezone(request.getParameter("timezone"));
+				org.setTeams_link(request.getParameter("teamslink"));
+
+				mo=new ManageOrganizer();
+				int id=mo.addNewOrganizer(org);
+
+				rd = request.getRequestDispatcher("/OrganizerHome.jsp?orgid=R-" + id);
+				rd.forward(request, response);
 			}
 		}
 

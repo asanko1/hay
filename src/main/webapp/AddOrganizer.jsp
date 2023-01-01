@@ -31,7 +31,7 @@
 			<div class="dropdown">
 				<button class="dropbtn">Organizer</button>
 				<div class="dropdown-content">
-					<a href="#">Add New Organizer</a> 
+					<a href="AddOrganizer">Add New Organizer</a>
 					<a href="#">Manage Organizer</a> 
 					
 				</div>
@@ -56,14 +56,14 @@
                     <font color="blue" size="5">Hi! <%=request.getParameter("u")%></font>
                     
         <%}%>
-         <% if(session.getAttribute("email")==null){
-                                     response.sendRedirect("index.jsp");
-                       }%>
+        <% if(session.getAttribute("email")==null){ %>
+                             response.sendRedirect("index.jsp");
+                <%}%>
 
 	<div style="padding-left: 200px" >
 	
-		<form action="Navigator" method="post" enctype="multipart/form-data">
-				<input type="hidden" name="form_id" value="addprof" >
+		<form action="Navigator" method="post" >
+				<input type="hidden" name="form_id" value="addorg" >
 
                 <table>
                     <tr>
@@ -104,84 +104,45 @@
                         
                     </tr>
                     <tr>
-                        <td>Source</td>
-                        <td>&nbsp;</td>
-                        <td><input type="text" size="30" name="source"></td>
-                    	<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-                        <td>Reference Employee Id</td>
-                        <td>&nbsp;</td>
-                        <td><input type="text" size="30" name="ref"></td>
-                        
-                    </tr>
-                    <tr>
-                        <td>LinkedIn Profile</td>
-                        <td>&nbsp;</td>
-                        <td><input type="text" size="30" name="linkedinprof"></td>
-                    	<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-                        <td>Github Link</td>
-                        <td>&nbsp;</td>
-                        <td><input type="text" size="30" name="githublink"></td>
-                        
-                    </tr>
-                    <tr>
                         <td>Department</td>
-                        <td>&nbsp;</td>
-                         <td><select name="dept">
-                                <option value="DE">DE</option>
-                                <option value="DS">DS</option>
-                                <option value="HR">HR</option>
-                                <option value="Finance">Finance</option>
-                                <option value="Marketing">Marketing</option>
-                                <option value="HealthEM">HealthEM</option>
 
-                            </select>
-                        </td>
-
-
-                        <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-                        <td>JOB ID</td>
-                        <td>&nbsp;</td>
-                        <td><input type="text" size="30" name="jobid"></td>
-
-                    </tr>
-                    <tr>
-                        <td>Visa Status</td>
-                        <td>&nbsp;</td>
-                        <td><input type="text" size="30" name="visa"></td>
-                    	<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-                        <td>Status</td>
-                        <td>&nbsp;</td>
                         <td>
-                            <select name="status">
-                                <option value="Open">Open</option>
-                            </select>
+                             <td><select name="dept">
+                                    <option value="DE">DE</option>
+                                    <option value="DS">DS</option>
+                                    <option value="HR">HR</option>
+                                    <option value="Finance">Finance</option>
+                                    <option value="Marketing">Marketing</option>
+                                    <option value="HealthEM">HealthEM</option>
+
+                                </select>
+                            </td>
                         </td>
+                    	<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                        <td>Leadership User</td>
+                        <td>&nbsp;</td>
+                        <td><input type="checkbox" name="leadership" id="leadership" ></td>
                         
                     </tr>
                     <tr>
-                        <td>Gender</td>
+                        <td>Timezone</td>
                         <td>&nbsp;</td>
-                        <td><select name="gender">
-                                <option value="M">Male</option>
-                                <option value="M">Female</option>
-
+                        <td><select name="timezone">
+                                <option value="ATL">ATL</option>
+                                <option value="CST">CST</option>
+                                <option value="EST">EST</option>
+                                <option value="GMT">GMT</option>
+                                <option value="IST">IST</option>
+                                <option value="PST">PST</option>
                             </select>
                         </td>
-                        <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-                        <td>Ex-Tredence Employee</td>
+                    	<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                        <td>Teams Link</td>
                         <td>&nbsp;</td>
-                        <td>
-                            <input type="checkbox" name="exemp_flg" id="exemp_flg" onclick="showexempid()">
-                            <input type="text" name="exempid" id="exempid" style="display:none" value="Enter old employee id" onclick="emptytext()">
-                        </td>
-
+                        <td><input type="text" size="30" name="teamslink"></td>
+                        
                     </tr>
-                    <tr></tr>
-                    <tr></tr>
-                     <tr>
-                        <td colspan="7" align="center"> Upload Resume &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="file" name="resume"></td>
-                     </tr>
-                    <tr>
+
                     <tr></tr>
                     <tr></tr>
                     <td colspan="7" align="center"><input type="submit" value="Create Profile"></td>

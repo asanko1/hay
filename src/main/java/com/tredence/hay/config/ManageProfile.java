@@ -26,7 +26,7 @@ public class ManageProfile {
             try {
                 ms = new ManageSQL();
                 sql = ms.getSQL(BigInteger.valueOf(3));
-                sql = sql.replaceFirst("[?]", (pf.getFirst_name() != null ? "'" + pf.getProfile_sythetic_key() + "'" : "''"));
+                sql = sql.replaceFirst("[?]", (pf.getProfile_sythetic_key() != null ? "'" + pf.getProfile_sythetic_key() + "'" : "''"));
                 sql = sql.replaceFirst("[?]", (pf.getFirst_name() != null ? "'" + pf.getFirst_name() + "'" : "''"));
                 sql = sql.replaceFirst("[?]", (pf.getLast_name() != null ? "'" + pf.getLast_name() + "'" : "''"));
                 sql = sql.replaceFirst("[?]", (pf.getPrimary_phn() != null ? "'" + pf.getPrimary_phn() + "'" : "''"));
@@ -46,6 +46,8 @@ public class ManageProfile {
                 sql = sql.replaceFirst("[?]", (pf.getGender() != null ? "'" + pf.getGender() + "'" : "''"));
                 sql = sql.replaceFirst("[?]", (pf.getExemp_flg() != null ? "'" + pf.getExemp_flg() + "'" : "''"));
                 sql = sql.replaceFirst("[?]", (pf.getExemp_id() != null ? "'" + pf.getExemp_id() + "'" : "''"));
+                sql = sql.replaceFirst("[?]", (pf.getDept() != null ? "'" + pf.getDept() + "'" : "''"));
+                sql = sql.replaceFirst("[?]", (pf.getJob_id() != null ? "'" + pf.getJob_id() + "'" : "''"));
 
                 System.out.println(sql);
                 stmt = conn.createStatement();
