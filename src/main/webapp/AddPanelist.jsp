@@ -45,12 +45,16 @@
 			<div class="dropdown">
 				<button class="dropbtn">Panelist</button>
 				<div class="dropdown-content">
-					<a href="#">Add New Panelist</a> 
+					<a href="AddPanelist.jsp">Add New Panelist</a>
 					<a href="#">Manage Panelist</a> 
 				</div>
 			</div>
 			<div class="dropdown">
-            				<button class="dropbtn">Logout</button>
+            				<button class="dropbtn"><img src="images/logout.png" width="10" height="15"></button>
+                            <div class="dropdown-content">
+                                <a href="Logout">Logout</a>
+
+                            </div>
 
             </div>
 			
@@ -62,9 +66,9 @@
                     <font color="blue" size="5">Hi! <%=request.getParameter("u")%></font>
                     
         <%}%>
-        <% if(session.getAttribute("email")==null){ %>
+        <% if(session.getAttribute("email")==null){
                              response.sendRedirect("index.jsp");
-                <%}%>
+                }%>
 
 	<div style="padding-left: 200px" >
 	    <%
@@ -149,7 +153,7 @@
                     	<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
                         <td>Linkedin Profile</td>
                         <td>&nbsp;</td>
-                        <td><input type="text" size="30" name="teamslink"></td>
+                        <td><input type="text" size="30" name="linkedinurl"></td>
                         
                     </tr>
                     <tr>

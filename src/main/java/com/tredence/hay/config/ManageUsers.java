@@ -19,7 +19,7 @@ public class ManageUsers {
     String sql;
     ArrayList<Users> users=new ArrayList<Users>();
     public ArrayList<Users> getAllUsers(){
-            user=new Users();
+
             conn=new DBConnection().getDBConnection();
             try{
                 ms=new ManageSQL();

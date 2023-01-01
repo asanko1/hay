@@ -28,8 +28,13 @@
             <font color="red" size="5">Login failed. Please select userid and role correctly.</font>
             </center>
         <%}
-	}
+	}else if(request.getParameter("logout")!=null){
+	 if(request.getParameter("logout").equals("Y")){
 	%>
+	            <center>
+                <font color="red" size="5">You have successfully logged out</font>
+                </center>
+	<%}}%>
 	<br>
 
 	<div style="padding-left: 500px">
@@ -46,11 +51,10 @@
 				<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
 				<td align="center">
 				<select name="userid">
-				    <option>Select</option>
-				    <%for(int i=0;i<users.size();i++){
-                        System.out.println(users.get(i).getEmail());
-				    %>
+				    <option value="">Select</option>
+				    <%for(int i=1;i<users.size();i++){
 
+				    %>
 				        <option value="<%=users.get(i).getEmail()%>"><%=users.get(i).getEmail()%></option>
 				    <%}%>
 				</select>

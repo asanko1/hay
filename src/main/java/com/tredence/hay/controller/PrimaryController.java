@@ -1,10 +1,13 @@
 package com.tredence.hay.controller;
+import java.awt.*;
 import java.io.*;
 
 import com.tredence.hay.config.ManageOrganizer;
+import com.tredence.hay.config.ManagePanelist;
 import com.tredence.hay.config.ManageProfile;
 import com.tredence.hay.config.ManageUsers;
 import com.tredence.hay.model.Organizer;
+import com.tredence.hay.model.Panelist;
 import com.tredence.hay.model.Profile;
 import com.tredence.hay.model.Users;
 import javax.servlet.*;
@@ -48,7 +51,9 @@ public class PrimaryController extends HttpServlet {
 	private static final int MAX_FILE_SIZE = 1024 * 1024 * 40; // 40MB
 	private static final int MAX_REQUEST_SIZE = 1024 * 1024 * 50; // 50MB
 	Organizer org;
+	Panelist pnl;
 	ManageOrganizer mo;
+	ManagePanelist mpnl;
 
 	/**
      * Default constructor. 
@@ -143,6 +148,27 @@ public class PrimaryController extends HttpServlet {
 
 				rd = request.getRequestDispatcher("/OrganizerHome.jsp?orgid=R-" + id);
 				rd.forward(request, response);
+			}
+			else if(form_id.equals("addpnl")){
+				pnl=new Panelist();
+				pnl.setPanelist_synthetic_key("pnl1");
+				pnl.setFirst_name(request.getParameter("fname"));
+				pnl.setLast_name(request.getParameter("lname"));
+				pnl.setEmail(request.getParameter("email"));
+				pnl.setPhone(request.getParameter("phn"));
+				pnl.setCity(request.getParameter("city"));
+				pnl.setCountry(request.getParameter("country"));
+				pnl.setDept(request.getParameter("dept"));
+				pnl.setLeadership_profile(request.getParameter("leadership"));
+				pnl.setLinkedin_url(request.getParameter("linkedinurl"));
+				pnl.setTimezone(request.getParameter("timezone"));
+				pnl.setSkillset(request.getParameter("skillset"));
+				mpnl = new ManagePanelist();
+				int id=mpnl.addNewPanelist(pnl);
+				rd = request.getRequestDispatcher("/OrganizerHome.jsp?pnlid=I-" + id);
+				rd.forward(request, response);
+
+
 			}
 		}
 

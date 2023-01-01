@@ -39,12 +39,16 @@
 			<div class="dropdown">
 				<button class="dropbtn">Panelist</button>
 				<div class="dropdown-content">
-					<a href="#">Add New Panelist</a> 
+					<a href="AddPanelist.jsp">Add New Panelist</a>
 					<a href="#">Manage Panelist</a> 
 				</div>
 			</div>
 			<div class="dropdown">
-            				<button class="dropbtn">Logout</button>
+                <button class="dropbtn"><img src="images/logout.png" width="10" height="15"></button>
+                <div class="dropdown-content">
+                    <a href="Logout">Logout</a>
+
+                </div>
 
             </div>
 			
@@ -78,7 +82,11 @@
                             <center>
                                <font color="green" size="5">New Organizer <a href=""><%=request.getParameter("orgid")%></a> Created.</font>
                             </center>
-               	        <%}%>
+               	        <%}else if (request.getParameter("pnlid")!=null){%>
+               	            <center>
+                               <font color="green" size="5">New Panelist <a href=""><%=request.getParameter("pnlid")%></a> Created.</font>
+                            </center>
+                        <%}%>
         </div>
     <br>
 	<div style="padding-left: 20px">
