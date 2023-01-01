@@ -113,3 +113,9 @@
 0:0:0:0:0:0:0:1 - - [31/Dec/2022:21:45:49 -0500] "GET /hay/ HTTP/1.1" 200 1531 http-bio-9090-exec-1 366
 0:0:0:0:0:0:0:1 - - [31/Dec/2022:21:46:31 -0500] "GET /hay/ HTTP/1.1" 200 1531 http-bio-9090-exec-2 329
 0:0:0:0:0:0:0:1 - - [31/Dec/2022:21:47:37 -0500] "GET /hay/ HTTP/1.1" 200 1547 http-bio-9090-exec-1 384
+0:0:0:0:0:0:0:1 - - [31/Dec/2022:21:48:11 -0500] "GET /hay/ HTTP/1.1" 200 1547 http-bio-9090-exec-1 325
+0:0:0:0:0:0:0:1 - - [31/Dec/2022:21:49:44 -0500] "POST /hay/Navigator HTTP/1.1" 200 1613 http-bio-9090-exec-4 165
+0:0:0:0:0:0:0:1 - - [31/Dec/2022:21:49:45 -0500] "GET /hay/AddProfile.jsp HTTP/1.1" 200 7649 http-bio-9090-exec-6 8
+0:0:0:0:0:0:0:1 - - [31/Dec/2022:21:49:49 -0500] "GET /hay/SearchProfile.jsp HTTP/1.1" 200 3418 http-bio-9090-exec-7 9
+0:0:0:0:0:0:0:1 - - [31/Dec/2022:21:49:53 -0500] "POST /hay/Navigator HTTP/1.1" 200 9139 http-bio-9090-exec-8 563
+0:0:0:0:0:0:0:1 - - [31/Dec/2022:21:49:57 -0500] "GET /hay/AddOrganizer.jsp HTTP/1.1" 200 5874 http-bio-9090-exec-9 8
