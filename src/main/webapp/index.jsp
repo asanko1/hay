@@ -47,7 +47,9 @@
 				<td align="center">
 				<select name="userid">
 				    <option>Select</option>
-				    <%for(int i=0;i<users.size();i++){%>
+				    <%for(int i=0;i<users.size();i++){
+                        System.out.println(users.get(i).getEmail());
+				    %>
 
 				        <option value="<%=users.get(i).getEmail()%>"><%=users.get(i).getEmail()%></option>
 				    <%}%>

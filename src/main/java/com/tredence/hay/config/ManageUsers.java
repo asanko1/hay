@@ -29,6 +29,7 @@ public class ManageUsers {
                 rs= stmt.executeQuery(sql);
                 while(rs.next())
                 {
+                    user=new Users();
                     user.setEmail(rs.getString(1));
 
                     users.add(user);
@@ -37,6 +38,7 @@ public class ManageUsers {
             }catch(SQLException e){
                 e.printStackTrace();
             }
+
             return users;
     }
 
