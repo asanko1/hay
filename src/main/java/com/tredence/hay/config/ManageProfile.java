@@ -148,7 +148,7 @@ public class ManageProfile {
                     pf.setCountry(rs2.getString(10));
                     pf.setSource(rs2.getString(11));
                     pf.setRef_emp_id(rs2.getString(13));
-                    pf.setLast_updated(rs2.getDate(14));
+                    pf.setLast_updated(rs2.getTimestamp(14));
                     pf.setBlacklisted(rs2.getString(15));
                     pf.setVisa_status(rs2.getString(16));
                     pf.setLinkedin_url(rs2.getString(17));

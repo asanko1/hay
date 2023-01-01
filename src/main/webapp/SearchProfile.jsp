@@ -118,6 +118,7 @@
     				<td align="center">Email</td>
     				<td align="center">Phone</td>
     				<td align="center">Status</td>
+    				<td align="center">Last Updated</td>
     				<td align="center">Action</td>
     			</tr>
     			</thead>
@@ -131,9 +132,10 @@
     				<td><%= pf.getPrimary_email()%></td>
     				<td><%= pf.getPrimary_phn()%></td>
     				<td><%= pf.getStatus()%></td>
+    				<td><%= pf.getLast_updated().toString().substring(0,19)%></td>
     				<td align="center">
-    						<a href="">Interview Rounds</a> &nbsp;
-    						<a href="">Full Profile</a> &nbsp;
+
+    						<a href="">>></a> &nbsp;
     						<%if(pf.getBlacklisted().equals("Y")){%>
                                 <b>Blacklisted</b>
     						<%}else{%>
