@@ -31,7 +31,7 @@
 			<div class="dropdown">
 				<button class="dropbtn">Organizer</button>
 				<div class="dropdown-content">
-					<a href="AddOrganizer">Add New Organizer</a>
+					<a href="AddOrganizer.jsp">Add New Organizer</a>
 					<a href="#">Manage Organizer</a> 
 					
 				</div>
