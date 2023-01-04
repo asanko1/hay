@@ -94,6 +94,7 @@
 	        				<option value="profile_id">Profile Id</option>
 	        				<option value="email">Email</option>
 	        				<option value="phn">Phone</option>
+	        				<option value="tag">Tag</option>
 	        				<option value="all">List All</option>
 	        			</select>
 	        		</td>

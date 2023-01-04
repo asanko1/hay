@@ -134,6 +134,9 @@ public class ProfileCreateController extends HttpServlet implements FilePath{
 					else if(fieldName.equals("jobid")){
 						pf.setJob_id(value);
 					}
+					else if(fieldName.equals("tag")){
+						pf.setTag(value);
+					}
 
 				} else {
 					 resume = uploadItem;

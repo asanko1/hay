@@ -48,6 +48,7 @@ public class ManageProfile {
                 sql = sql.replaceFirst("[?]", (pf.getExemp_id() != null ? "'" + pf.getExemp_id() + "'" : "''"));
                 sql = sql.replaceFirst("[?]", (pf.getDept() != null ? "'" + pf.getDept() + "'" : "''"));
                 sql = sql.replaceFirst("[?]", (pf.getJob_id() != null ? "'" + pf.getJob_id() + "'" : "''"));
+                sql = sql.replaceFirst("[?]", (pf.getTag() != null ? "'" + pf.getTag() + "'" : "''"));
 
                 System.out.println(sql);
                 stmt = conn.createStatement();
@@ -112,8 +113,8 @@ public class ManageProfile {
                 ms = new ManageSQL();
                 sql = ms.getSQL(BigInteger.valueOf(7));
                 pstmt=conn.prepareStatement(sql);
-                pstmt.setString(1,search_val);
-                pstmt.setString(2,search_val);
+                pstmt.setString(1,search_val.toUpperCase());
+                pstmt.setString(2,search_val.toUpperCase());
             }
             else if (search_by.equals("phn")){
                 ms = new ManageSQL();
@@ -126,6 +127,15 @@ public class ManageProfile {
                 ms = new ManageSQL();
                 sql = ms.getSQL(BigInteger.valueOf(9));
                 pstmt=conn.prepareStatement(sql);
+
+            }
+            else if (search_by.equals("tag")){
+                ms = new ManageSQL();
+                sql = ms.getSQL(BigInteger.valueOf(14));
+                String v = ("%".concat(search_val.toUpperCase())).concat("%");
+                System.out.println(v);
+                pstmt=conn.prepareStatement(sql);
+                pstmt.setString(1,v);
 
             }
             rs=pstmt.executeQuery();

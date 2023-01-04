@@ -183,9 +183,13 @@
                     <tr></tr>
                     <tr></tr>
                      <tr>
-                        <td colspan="7" align="center"> Upload Resume &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="file" name="resume"></td>
+                        <td colspan="3" align="left"> Upload Resume &nbsp;<input type="file" name="resume"></td>
+                        <td>&nbsp;</td>
+                        <td>Tag</td>
+                        <td>&nbsp;</td>
+                        <td><input type="text" name="tag"/></td>
                      </tr>
-                    <tr>
+
                     <tr></tr>
                     <tr></tr>
                     <td colspan="7" align="center"><input type="submit" value="Create Profile"></td>

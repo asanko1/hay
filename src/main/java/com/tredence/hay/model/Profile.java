@@ -5,7 +5,7 @@ import java.util.Date;
 
 public class Profile {
 	BigInteger profile_id;
-	String  first_name, last_name, profile_sythetic_key,primary_phn, primary_email, sec_phn, sec_email, city, country, source, ref_emp_id, resume, blacklisted, visa_status,linkedin_url,github_url,status,last_updated_by,gender,exemp_flg,exemp_id,dept, job_id;
+	String  first_name, last_name, profile_sythetic_key,primary_phn, primary_email, sec_phn, sec_email, city, country, source, ref_emp_id, resume, blacklisted, visa_status,linkedin_url,github_url,status,last_updated_by,gender,exemp_flg,exemp_id,dept, job_id,tag;
 	Date last_updated;
 	
 	
@@ -15,7 +15,7 @@ public class Profile {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Profile(BigInteger profile_id, String first_name, String last_name, String profile_sythetic_key, String primary_phn, String primary_email, String sec_phn, String sec_email, String city, String country, String source, String ref_emp_id, String resume, String blacklisted, String visa_status, String linkedin_url, String github_url, String status, String last_updated_by, String gender, String exemp_flg, String exemp_id, String dept, String job_id, Date last_updated) {
+	public Profile(BigInteger profile_id, String first_name, String last_name, String profile_sythetic_key, String primary_phn, String primary_email, String sec_phn, String sec_email, String city, String country, String source, String ref_emp_id, String resume, String blacklisted, String visa_status, String linkedin_url, String github_url, String status, String last_updated_by, String gender, String exemp_flg, String exemp_id, String dept, String job_id, Date last_updated, String tag) {
 		this.profile_id = profile_id;
 		this.first_name = first_name;
 		this.last_name = last_name;
@@ -41,6 +41,15 @@ public class Profile {
 		this.dept = dept;
 		this.job_id = job_id;
 		this.last_updated = last_updated;
+		this.tag=tag;
+	}
+
+	public String getTag() {
+		return tag;
+	}
+
+	public void setTag(String tag) {
+		this.tag = tag;
 	}
 
 	public String getDept() {

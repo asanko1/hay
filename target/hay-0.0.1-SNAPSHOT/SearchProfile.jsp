@@ -47,7 +47,7 @@
 			<div class="dropdown">
 				<button class="dropbtn">Organizer</button>
 				<div class="dropdown-content">
-					<a href="#">Add New Organizer</a>
+					<a href="AddOrganizer.jsp">Add New Organizer</a>
 					<a href="#">Manage Organizer</a>
 
 				</div>
@@ -55,12 +55,16 @@
 			<div class="dropdown">
 				<button class="dropbtn">Panelist</button>
 				<div class="dropdown-content">
-					<a href="#">Add New Panelist</a>
+					<a href="AddPanelist.jsp">Add New Panelist</a>
 					<a href="#">Manage Panelist</a>
 				</div>
 			</div>
 			<div class="dropdown">
-            				<button class="dropbtn">Logout</button>
+            				<button class="dropbtn"><img src="images/logout.png" width="10" height="15"></button>
+                            <div class="dropdown-content">
+                                <a href="Logout">Logout</a>
+
+                            </div>
 
             </div>
 
@@ -90,6 +94,7 @@
 	        				<option value="profile_id">Profile Id</option>
 	        				<option value="email">Email</option>
 	        				<option value="phn">Phone</option>
+	        				<option value="tag">Tag</option>
 	        				<option value="all">List All</option>
 	        			</select>
 	        		</td>
@@ -132,10 +137,10 @@
     				<td><%= pf.getPrimary_email()%></td>
     				<td><%= pf.getPrimary_phn()%></td>
     				<td><%= pf.getStatus()%></td>
-    				<td><%= pf.getLast_updated()%></td>
+    				<td><%= pf.getLast_updated().toString().substring(0,19)%></td>
     				<td align="center">
-    						<a href="">Interview Rounds</a> &nbsp;
-    						<a href="">Full Profile</a> &nbsp;
+
+    						<a href="">>></a> &nbsp;
     						<%if(pf.getBlacklisted().equals("Y")){%>
                                 <b>Blacklisted</b>
     						<%}else{%>

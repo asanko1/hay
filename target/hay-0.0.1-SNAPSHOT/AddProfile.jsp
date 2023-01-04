@@ -31,7 +31,7 @@
 			<div class="dropdown">
 				<button class="dropbtn">Organizer</button>
 				<div class="dropdown-content">
-					<a href="#">Add New Organizer</a> 
+					<a href="AddOrganizer.jsp">Add New Organizer</a>
 					<a href="#">Manage Organizer</a> 
 					
 				</div>
@@ -39,12 +39,16 @@
 			<div class="dropdown">
 				<button class="dropbtn">Panelist</button>
 				<div class="dropdown-content">
-					<a href="#">Add New Panelist</a> 
+					<a href="AddPanelist.jsp">Add New Panelist</a>
 					<a href="#">Manage Panelist</a> 
 				</div>
 			</div>
 			<div class="dropdown">
-            				<button class="dropbtn">Logout</button>
+            				<button class="dropbtn"><img src="images/logout.png" width="10" height="15"></button>
+                            <div class="dropdown-content">
+                                <a href="Logout">Logout</a>
+
+                            </div>
 
             </div>
 			
@@ -56,7 +60,9 @@
                     <font color="blue" size="5">Hi! <%=request.getParameter("u")%></font>
                     
         <%}%>
-
+         <% if(session.getAttribute("email")==null){
+                                     response.sendRedirect("index.jsp");
+                       }%>
 
 	<div style="padding-left: 200px" >
 	
@@ -120,6 +126,27 @@
                         <td>&nbsp;</td>
                         <td><input type="text" size="30" name="githublink"></td>
                         
+                    </tr>
+                    <tr>
+                        <td>Department</td>
+                        <td>&nbsp;</td>
+                         <td><select name="dept">
+                                <option value="DE">DE</option>
+                                <option value="DS">DS</option>
+                                <option value="HR">HR</option>
+                                <option value="Finance">Finance</option>
+                                <option value="Marketing">Marketing</option>
+                                <option value="HealthEM">HealthEM</option>
+
+                            </select>
+                        </td>
+
+
+                        <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                        <td>JOB ID</td>
+                        <td>&nbsp;</td>
+                        <td><input type="text" size="30" name="jobid"></td>
+
                     </tr>
                     <tr>
                         <td>Visa Status</td>
