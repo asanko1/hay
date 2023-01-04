@@ -165,6 +165,12 @@ public class ManageProfile {
                     pf.setGithub_url(rs2.getString(18));
                     pf.setStatus(rs2.getString(19));
                     pf.setLast_updated_by(rs2.getString(20));
+                    pf.setGender(rs2.getString(21));
+                    pf.setExemp_flg(rs2.getString(22));
+                    pf.setExemp_id(rs2.getString(23));
+                    pf.setDept(rs2.getString(24));
+                    pf.setJob_id(rs2.getString(25));
+                    pf.setTag(rs2.getString(26));
 
                     profiles.add(pf);
                 }

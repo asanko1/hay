@@ -140,7 +140,7 @@
     				<td><%= pf.getLast_updated().toString().substring(0,19)%></td>
     				<td align="center">
 
-    						<a href="">>></a> &nbsp;
+    						<a href="Navigator?form_id=profiledetail&PID=<%=pf.getProfile_sythetic_key()%>">>></a> &nbsp;
     						<%if(pf.getBlacklisted().equals("Y")){%>
                                 <b>Blacklisted</b>
     						<%}else{%>

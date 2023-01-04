@@ -68,6 +68,17 @@ public class PrimaryController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
+		String form_id=request.getParameter("form_id");
+		ArrayList<Profile> profiles=new ArrayList<Profile>();
+		if(form_id.equals("profiledetail")){
+			String PID=request.getParameter("PID");
+			pf=new Profile();
+			mp=new ManageProfile();
+			profiles=mp.searchProfile("profile_id",PID);
+			request.setAttribute("profile",profiles.get(0));
+			rd = request.getRequestDispatcher("/DetailedProfile.jsp");
+			rd.forward(request, response);
+		}
 	}
 
 	/**
