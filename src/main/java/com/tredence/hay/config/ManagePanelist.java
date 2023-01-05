@@ -5,6 +5,7 @@ import com.tredence.hay.model.Panelist;
 
 import java.math.BigInteger;
 import java.sql.*;
+import java.util.ArrayList;
 
 public class ManagePanelist {
     Panelist panelist;
@@ -17,6 +18,34 @@ public class ManagePanelist {
     int id,id2;
     Panelist pnl;
 
+    ArrayList<Panelist> pnls;
+    public ArrayList<Panelist> getAllPanelists()
+    {
+        conn=new DBConnection().getDBConnection();
+        pnl=new Panelist();
+        pnls=new ArrayList<Panelist>();
+
+        try{
+            ms=new ManageSQL();
+            sql=ms.getSQL(BigInteger.valueOf(20));
+            stmt =conn.createStatement();
+            rs= stmt.executeQuery(sql);
+            while(rs.next())
+            {
+                pnl=new Panelist();
+                pnl.setPanelist_synthetic_key(rs.getString(1));
+                pnl.setEmail(rs.getString(2));
+                pnls.add(pnl);
+            }
+            conn.close();
+        }
+        catch(SQLException e)
+        {
+            e.printStackTrace();
+        }
+
+        return pnls;
+    }
     public int addNewPanelist(Panelist pnl){
 
         conn=new DBConnection().getDBConnection();

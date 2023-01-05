@@ -284,9 +284,90 @@
             ArrayList<Round> rounds=new ArrayList<Round>();
             rounds=(ArrayList<Round>) request.getAttribute("rounds");
             if(rounds.size()==0){%>
-               <center> <font color="green" size="3"> No interview rounds scheduled yet! <a href="">Start now</a> </font> </center>
+               <center> <font color="green" size="3"> No interview rounds scheduled yet! <button type="button" onclick="showscrroundform()">Start now</button> </font> </center>
+
+        <%}else{%>
 
         <%}%>
+        <br><br>
+
+        <center>
+        <div id="roundform" style="display:none">
+        <table id="scrroundform" >
+            <th> <td colspan="2"> Create New Interview Round </td> </th>
+            <tr>
+                <td>Round Name</td>
+                <td>
+                    <select name="roundname">
+                        <option value="Screening">Screening</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>Round Type</td>
+                <td>
+                    <select name="roundtype">
+                        <option value="HR Screening">HR Screening</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+
+                    <td>Mode</td>
+                    <td>
+                    <select name="mode">
+                        <option value="Telephonic">Telephonic</option>
+                    </select>
+                    </td>
+
+            </tr>
+            <tr>
+
+                    <td>Panelist</td>
+                    <td><select name="Panelist" >
+                        <option value="Select">Select</option>
+                        <%
+                        ArrayList<Organizer> orgs=new ArrayList<Organizer>();
+                        orgs=(ArrayList<Organizer>) request.getAttribute("orgs");
+                        for(int i=0;i<orgs.size();i++){ %>
+                            <option value="<%=orgs.get(i).getOrganizer_synthetic_key()%>"><%=orgs.get(i).getEmail()%></option>
+                        <%}%></td>
+                    </select>
+
+            </tr>
+            <tr>
+
+                    <td>Time</td>
+                    <td><input type="datetime-local" id="scheduled_on" name="scheduled_on"></td>
+            </tr>
+            <tr>
+                    <td>Timezone</td>
+                    <td><select name="timezone">
+                            <option value="ATL">ATL</option>
+                            <option value="CST">CST</option>
+                            <option value="EST">EST</option>
+                            <option value="GMT">GMT</option>
+                            <option value="IST">IST</option>
+                            <option value="PST">PST</option>
+                        </select>
+                    </td>
+
+            </tr>
+        </table></div>
+        </center>
 	</div>
 </body>
+<script>
+function showscrroundform() {
+
+
+  var x = document.getElementById("roundform");
+    if (x.style.display === "none") {
+      x.style.display = "";
+    } else {
+      x.style.display = "none";
+    }
+ return;
+}
+</script>
 </html>

@@ -32,7 +32,7 @@ public class ManageRounds {
                 rs=pstmt.executeQuery();
                 while (rs.next()){
                     round=new Round();
-                    round.setRound_id(BigInteger.valueOf(rs.getInt(1)));
+
                     round.setRound_Name(rs.getString(2));
                     round.setPanelist_id(rs.getString(3));
                     round.setOrganizer_id(rs.getString(4));

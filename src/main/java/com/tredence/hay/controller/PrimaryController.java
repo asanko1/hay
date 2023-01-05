@@ -69,6 +69,8 @@ public class PrimaryController extends HttpServlet {
 		ArrayList<Round> rounds=new ArrayList<Round>();
 		mr=new ManageRounds();
 		ArrayList<Profile> profiles=new ArrayList<Profile>();
+		ArrayList<Organizer> orgs=new ArrayList<Organizer>();
+		ArrayList<Panelist> pnls=new ArrayList<Panelist>();
 		if(form_id.equals("profiledetail")){
 			String PID=request.getParameter("PID");
 			pf=new Profile();
@@ -77,6 +79,12 @@ public class PrimaryController extends HttpServlet {
 			request.setAttribute("profile",profiles.get(0));
 			rounds=mr.getAllRoundsOfProfile(request.getParameter("PID"));
 			request.setAttribute("rounds",rounds);
+			mo=new ManageOrganizer();
+			orgs=mo.getAllOrganizers();
+			mpnl=new ManagePanelist();
+			pnls=mpnl.getAllPanelists();
+			request.setAttribute("orgs",orgs);
+			request.setAttribute("pnls",pnls);
 			rd = request.getRequestDispatcher("/DetailedProfile.jsp");
 			rd.forward(request, response);
 		}

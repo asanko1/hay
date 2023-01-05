@@ -4,6 +4,7 @@ import com.tredence.hay.model.Organizer;
 
 import java.math.BigInteger;
 import java.sql.*;
+import java.util.ArrayList;
 
 public class ManageOrganizer {
     Organizer org;
@@ -14,19 +15,24 @@ public class ManageOrganizer {
     String sql;
     PreparedStatement pstmt;
     int id,id2;
-    public Organizer getAllOrganizers()
+    ArrayList<Organizer> orgs;
+    public ArrayList<Organizer> getAllOrganizers()
     {
         conn=new DBConnection().getDBConnection();
         org=new Organizer();
+        orgs=new ArrayList<Organizer>();
 
         try{
             ms=new ManageSQL();
-            sql=ms.getSQL(BigInteger.valueOf(1));
+            sql=ms.getSQL(BigInteger.valueOf(21));
             stmt =conn.createStatement();
             rs= stmt.executeQuery(sql);
             while(rs.next())
             {
-
+                org=new Organizer();
+                org.setOrganizer_synthetic_key(rs.getString(1));
+                org.setEmail(rs.getString(2));
+                orgs.add(org);
             }
             conn.close();
         }
@@ -35,7 +41,7 @@ public class ManageOrganizer {
             e.printStackTrace();
         }
 
-        return org;
+        return orgs;
     }
 
     public int addNewOrganizer (Organizer org){
