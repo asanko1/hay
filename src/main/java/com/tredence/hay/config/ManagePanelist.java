@@ -62,5 +62,43 @@ public class ManagePanelist {
 
 
     }
+    public String getPanelistName(String panelist_id){
+        String panelist_name=null;
+        conn=new DBConnection().getDBConnection();
+        try {
+            ms = new ManageSQL();
+            sql = ms.getSQL(BigInteger.valueOf(16));
+            pstmt=conn.prepareStatement(sql);
+            pstmt.setString(1,panelist_id);
+            rs=pstmt.executeQuery();
+            while(rs.next()){
+                panelist_name=rs.getString(1);
+            }
+            conn.close();
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
 
+        return panelist_name;
+    }
+
+    public String getPanelistSyntheticKey(String email){
+        String panelist_synthetic_key=null;
+        conn=new DBConnection().getDBConnection();
+        try {
+            ms = new ManageSQL();
+            sql = ms.getSQL(BigInteger.valueOf(19));
+            pstmt=conn.prepareStatement(sql);
+            pstmt.setString(1,email);
+            rs=pstmt.executeQuery();
+            while(rs.next()){
+                panelist_synthetic_key=rs.getString(1);
+            }
+            conn.close();
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
+
+        return panelist_synthetic_key;
+    }
 }

@@ -6,8 +6,24 @@ import java.util.Date;
 public class Round {
 
     BigInteger Round_id;
-    String Round_Name,panelist_id,organizer_id,profile_id,mode,isRescheduled,duration,round_type;
+    String Round_Name,panelist_id,organizer_id,profile_id,mode,isRescheduled,duration,round_type,panelist_name, organizer_name;
     Date scheduled_on,last_updated;
+
+    public String getPanelist_name() {
+        return panelist_name;
+    }
+
+    public void setPanelist_name(String panelist_name) {
+        this.panelist_name = panelist_name;
+    }
+
+    public String getOrganizer_name() {
+        return organizer_name;
+    }
+
+    public void setOrganizer_name(String organizer_name) {
+        this.organizer_name = organizer_name;
+    }
 
     public Round() {
     }

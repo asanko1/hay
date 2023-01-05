@@ -2,14 +2,9 @@ package com.tredence.hay.controller;
 import java.awt.*;
 import java.io.*;
 
-import com.tredence.hay.config.ManageOrganizer;
-import com.tredence.hay.config.ManagePanelist;
-import com.tredence.hay.config.ManageProfile;
-import com.tredence.hay.config.ManageUsers;
-import com.tredence.hay.model.Organizer;
-import com.tredence.hay.model.Panelist;
-import com.tredence.hay.model.Profile;
-import com.tredence.hay.model.Users;
+import com.tredence.hay.config.*;
+import com.tredence.hay.model.*;
+
 import javax.servlet.*;
 import javax.servlet.http.*;
 import java.io.IOException;
@@ -54,6 +49,8 @@ public class PrimaryController extends HttpServlet {
 	Panelist pnl;
 	ManageOrganizer mo;
 	ManagePanelist mpnl;
+	String organizer_synthetic_key, panelist_synthetic_key;
+	ManageRounds mr;
 
 	/**
      * Default constructor. 
@@ -69,6 +66,8 @@ public class PrimaryController extends HttpServlet {
 		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 		String form_id=request.getParameter("form_id");
+		ArrayList<Round> rounds=new ArrayList<Round>();
+		mr=new ManageRounds();
 		ArrayList<Profile> profiles=new ArrayList<Profile>();
 		if(form_id.equals("profiledetail")){
 			String PID=request.getParameter("PID");
@@ -76,6 +75,8 @@ public class PrimaryController extends HttpServlet {
 			mp=new ManageProfile();
 			profiles=mp.searchProfile("profile_id",PID);
 			request.setAttribute("profile",profiles.get(0));
+			rounds=mr.getAllRoundsOfProfile(request.getParameter("PID"));
+			request.setAttribute("rounds",rounds);
 			rd = request.getRequestDispatcher("/DetailedProfile.jsp");
 			rd.forward(request, response);
 		}
@@ -110,10 +111,16 @@ public class PrimaryController extends HttpServlet {
 					session.setAttribute("role",user.getRole());
 
 					if(user.getRole().equals("Organizer")){
+						mo=new ManageOrganizer();
+						organizer_synthetic_key=mo.getOrganizerSyntheticKey(user.getEmail());
+						session.setAttribute("synthetic_key",organizer_synthetic_key);
 						rd = request.getRequestDispatcher("/OrganizerHome.jsp?u="+user.getEmail());
 						rd.forward(request, response);
 					}
 					else if(user.getRole().equals("Panelist")){
+						mpnl=new ManagePanelist();
+						panelist_synthetic_key=mpnl.getPanelistSyntheticKey(user.getEmail());
+						session.setAttribute("sythetic_key",panelist_synthetic_key);
 						rd = request.getRequestDispatcher("/PanelistHome.jsp?u="+user.getEmail());
 						rd.forward(request, response);
 					}

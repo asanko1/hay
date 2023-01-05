@@ -60,6 +60,7 @@ public class ManageUsers {
                     login_valid=true;
                 }
             }
+            conn.close();
         }catch(SQLException e)
         {
             e.printStackTrace();

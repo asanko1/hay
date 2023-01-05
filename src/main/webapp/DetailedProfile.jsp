@@ -280,7 +280,13 @@
     </table>
     </div>
     <div style="float:right; width:50%; ">
+        <%
+            ArrayList<Round> rounds=new ArrayList<Round>();
+            rounds=(ArrayList<Round>) request.getAttribute("rounds");
+            if(rounds.size()==0){%>
+               <center> <font color="green" size="3"> No interview rounds scheduled yet! <a href="">Start now</a> </font> </center>
 
+        <%}%>
 	</div>
 </body>
 </html>

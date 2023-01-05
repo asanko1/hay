@@ -79,4 +79,44 @@ public class ManageOrganizer {
         }
         return id;
     }
+
+    public String getOrganizerName(String organizer_id){
+        String organizer_name=null;
+        conn=new DBConnection().getDBConnection();
+        try {
+            ms = new ManageSQL();
+            sql = ms.getSQL(BigInteger.valueOf(17));
+            pstmt=conn.prepareStatement(sql);
+            pstmt.setString(1,organizer_id);
+            rs=pstmt.executeQuery();
+            while(rs.next()){
+                organizer_name=rs.getString(1);
+            }
+            conn.close();
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
+
+        return organizer_name;
+    }
+
+    public String getOrganizerSyntheticKey(String email){
+        String organizer_synthetic_key=null;
+        conn=new DBConnection().getDBConnection();
+        try {
+            ms = new ManageSQL();
+            sql = ms.getSQL(BigInteger.valueOf(18));
+            pstmt=conn.prepareStatement(sql);
+            pstmt.setString(1,email);
+            rs=pstmt.executeQuery();
+            while(rs.next()){
+                organizer_synthetic_key=rs.getString(1);
+            }
+            conn.close();
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
+
+        return organizer_synthetic_key;
+    }
 }
