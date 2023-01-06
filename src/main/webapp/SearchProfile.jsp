@@ -11,14 +11,18 @@
 <meta charset="ISO-8859-1">
 <title>H.A.Y::Login</title>
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.13.1/datatables.min.css"/>
-
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.13.1/datatables.min.css"/>
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css"/>
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.1/css/dataTables.bootstrap4.min.css"/>
+<script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.13.1/datatables.min.js"></script>
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/1.13.1/js/dataTables.bootstrap4.min.js"></script>
 <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.13.1/datatables.min.js"></script>
 
 <link rel="stylesheet" href="css/style.css">
 <script src="js/index.js">
-$(document).ready(function () {
-    $('#example').DataTable();
-});
+
 </script>
 </head>
 <body>
@@ -43,7 +47,7 @@ $(document).ready(function () {
 			<div class="dropdown">
 				<button class="dropbtn">Organizer</button>
 				<div class="dropdown-content">
-					<a href="#">Add New Organizer</a>
+					<a href="AddOrganizer.jsp">Add New Organizer</a>
 					<a href="#">Manage Organizer</a>
 
 				</div>
@@ -51,12 +55,16 @@ $(document).ready(function () {
 			<div class="dropdown">
 				<button class="dropbtn">Panelist</button>
 				<div class="dropdown-content">
-					<a href="#">Add New Panelist</a>
+					<a href="AddPanelist.jsp">Add New Panelist</a>
 					<a href="#">Manage Panelist</a>
 				</div>
 			</div>
 			<div class="dropdown">
-            				<button class="dropbtn">Logout</button>
+            				<button class="dropbtn"><img src="images/logout.png" width="10" height="15"></button>
+                            <div class="dropdown-content">
+                                <a href="Logout">Logout</a>
+
+                            </div>
 
             </div>
 
@@ -86,6 +94,8 @@ $(document).ready(function () {
 	        				<option value="profile_id">Profile Id</option>
 	        				<option value="email">Email</option>
 	        				<option value="phn">Phone</option>
+	        				<option value="tag">Tag</option>
+	        				<option value="all">List All</option>
 	        			</select>
 	        		</td>
 	        		<td>
@@ -106,29 +116,40 @@ $(document).ready(function () {
     			Profile pf=new Profile();
     			%>
     			<table id="example" class="display" style="width:100%">
+    			<thead>
     			<tr>
-    				<td>Profile Id</td>
-    				<td>Name</td>
-    				<td>Email</td>
-    				<td>Phone</td>
-    				<td>Status</td>
-    				<td>Action</td>
+    				<td align="center">Profile Id</td>
+    				<td align="center">Name</td>
+    				<td align="center">Email</td>
+    				<td align="center">Phone</td>
+    				<td align="center">Status</td>
+    				<td align="center">Last Updated</td>
+    				<td align="center">Action</td>
     			</tr>
+    			</thead>
+    			<tbody>
     			<% for(int i=0;i<profiles.size();i++){
-    					pf=profiles.get(i);%> 
+    					pf=profiles.get(i);%>
+
     			<tr>
     				<td><%= pf.getProfile_sythetic_key()%></td>
     				<td><%= pf.getFirst_name() %> &nbsp;<%= pf.getLast_name()%></td>
     				<td><%= pf.getPrimary_email()%></td>
     				<td><%= pf.getPrimary_phn()%></td>
     				<td><%= pf.getStatus()%></td>
-    				<td>
-    						<a href="">View Interview Rounds</a> &nbsp;
+    				<td><%= pf.getLast_updated().toString().substring(0,19)%></td>
+    				<td align="center">
+
+    						<a href="Navigator?form_id=profiledetail&PID=<%=pf.getProfile_sythetic_key()%>">>></a> &nbsp;
+    						<%if(pf.getBlacklisted().equals("Y")){%>
+                                <b>Blacklisted</b>
+    						<%}else{%>
     						<a href="">Blacklist</a> &nbsp;
-    						<a href="">View Full Profile</a> &nbsp;
+    						<%}%>
     				</td>
     			</tr>
     			<%} %>
+    			</tbody>
     			</table>
     	<%} else if (request.getParameter("msg").equals("found_no_profile")){%>
     			<font color="red" size="5">No profile found</font>
@@ -136,4 +157,9 @@ $(document).ready(function () {
     	}%>
 
 </body>
+<script>
+$(document).ready(function () {
+    $('#example').DataTable();
+});
+</script>
 </html>

@@ -19,7 +19,7 @@ public class ManageUsers {
     String sql;
     ArrayList<Users> users=new ArrayList<Users>();
     public ArrayList<Users> getAllUsers(){
-            user=new Users();
+
             conn=new DBConnection().getDBConnection();
             try{
                 ms=new ManageSQL();
@@ -29,6 +29,7 @@ public class ManageUsers {
                 rs= stmt.executeQuery(sql);
                 while(rs.next())
                 {
+                    user=new Users();
                     user.setEmail(rs.getString(1));
 
                     users.add(user);
@@ -37,6 +38,7 @@ public class ManageUsers {
             }catch(SQLException e){
                 e.printStackTrace();
             }
+
             return users;
     }
 
@@ -58,6 +60,7 @@ public class ManageUsers {
                     login_valid=true;
                 }
             }
+            conn.close();
         }catch(SQLException e)
         {
             e.printStackTrace();

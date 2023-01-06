@@ -26,7 +26,7 @@ public class ManageProfile {
             try {
                 ms = new ManageSQL();
                 sql = ms.getSQL(BigInteger.valueOf(3));
-                sql = sql.replaceFirst("[?]", (pf.getFirst_name() != null ? "'" + pf.getProfile_sythetic_key() + "'" : "''"));
+                sql = sql.replaceFirst("[?]", (pf.getProfile_sythetic_key() != null ? "'" + pf.getProfile_sythetic_key() + "'" : "''"));
                 sql = sql.replaceFirst("[?]", (pf.getFirst_name() != null ? "'" + pf.getFirst_name() + "'" : "''"));
                 sql = sql.replaceFirst("[?]", (pf.getLast_name() != null ? "'" + pf.getLast_name() + "'" : "''"));
                 sql = sql.replaceFirst("[?]", (pf.getPrimary_phn() != null ? "'" + pf.getPrimary_phn() + "'" : "''"));
@@ -43,6 +43,12 @@ public class ManageProfile {
                 sql = sql.replaceFirst("[?]", (pf.getGithub_url() != null ? "'" + pf.getGithub_url() + "'" : "''"));
                 sql = sql.replaceFirst("[?]", (pf.getStatus() != null ? "'" + pf.getStatus() + "'" : "''"));
                 sql = sql.replaceFirst("[?]", (pf.getLast_updated_by() != null ? "'" + pf.getLast_updated_by() + "'" : "''"));
+                sql = sql.replaceFirst("[?]", (pf.getGender() != null ? "'" + pf.getGender() + "'" : "''"));
+                sql = sql.replaceFirst("[?]", (pf.getExemp_flg() != null ? "'" + pf.getExemp_flg() + "'" : "''"));
+                sql = sql.replaceFirst("[?]", (pf.getExemp_id() != null ? "'" + pf.getExemp_id() + "'" : "''"));
+                sql = sql.replaceFirst("[?]", (pf.getDept() != null ? "'" + pf.getDept() + "'" : "''"));
+                sql = sql.replaceFirst("[?]", (pf.getJob_id() != null ? "'" + pf.getJob_id() + "'" : "''"));
+                sql = sql.replaceFirst("[?]", (pf.getTag() != null ? "'" + pf.getTag() + "'" : "''"));
 
                 System.out.println(sql);
                 stmt = conn.createStatement();
@@ -107,8 +113,8 @@ public class ManageProfile {
                 ms = new ManageSQL();
                 sql = ms.getSQL(BigInteger.valueOf(7));
                 pstmt=conn.prepareStatement(sql);
-                pstmt.setString(1,search_val);
-                pstmt.setString(2,search_val);
+                pstmt.setString(1,search_val.toUpperCase());
+                pstmt.setString(2,search_val.toUpperCase());
             }
             else if (search_by.equals("phn")){
                 ms = new ManageSQL();
@@ -116,6 +122,21 @@ public class ManageProfile {
                 pstmt=conn.prepareStatement(sql);
                 pstmt.setString(1,search_val);
                 pstmt.setString(2,search_val);
+            }
+            else if (search_by.equals("all")){
+                ms = new ManageSQL();
+                sql = ms.getSQL(BigInteger.valueOf(9));
+                pstmt=conn.prepareStatement(sql);
+
+            }
+            else if (search_by.equals("tag")){
+                ms = new ManageSQL();
+                sql = ms.getSQL(BigInteger.valueOf(14));
+                String v = ("%".concat(search_val.toUpperCase())).concat("%");
+                System.out.println(v);
+                pstmt=conn.prepareStatement(sql);
+                pstmt.setString(1,v);
+
             }
             rs=pstmt.executeQuery();
             while (rs.next()){
@@ -137,13 +158,19 @@ public class ManageProfile {
                     pf.setCountry(rs2.getString(10));
                     pf.setSource(rs2.getString(11));
                     pf.setRef_emp_id(rs2.getString(13));
-                    pf.setLast_updated(rs2.getDate(14));
+                    pf.setLast_updated(rs2.getTimestamp(14));
                     pf.setBlacklisted(rs2.getString(15));
                     pf.setVisa_status(rs2.getString(16));
                     pf.setLinkedin_url(rs2.getString(17));
                     pf.setGithub_url(rs2.getString(18));
                     pf.setStatus(rs2.getString(19));
                     pf.setLast_updated_by(rs2.getString(20));
+                    pf.setGender(rs2.getString(21));
+                    pf.setExemp_flg(rs2.getString(22));
+                    pf.setExemp_id(rs2.getString(23));
+                    pf.setDept(rs2.getString(24));
+                    pf.setJob_id(rs2.getString(25));
+                    pf.setTag(rs2.getString(26));
 
                     profiles.add(pf);
                 }
