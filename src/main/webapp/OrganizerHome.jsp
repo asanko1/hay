@@ -90,7 +90,41 @@
         </div>
     <br>
 	<div style="padding-left: 20px">
-		
+		<div class="tab" >
+          <button class="tablinks" onclick="openCity(event, 'London')">My Tasks</button>
+          <button class="tablinks" onclick="openCity(event, 'Paris')">My Reports</button>
+          <button class="tablinks" onclick="openCity(event, 'Tokyo')">Leadership Reports</button>
+        </div>
+
+        <div id="London" class="tabcontent">
+          <h3>London</h3>
+          <p>London is the capital city of England.</p>
+        </div>
+
+        <div id="Paris" class="tabcontent">
+          <h3>Paris</h3>
+          <p>Paris is the capital of France.</p>
+        </div>
+
+        <div id="Tokyo" class="tabcontent">
+          <h3>Tokyo</h3>
+          <p>Tokyo is the capital of Japan.</p>
+        </div>
 	</div>
+	<script>
+    function openCity(evt, cityName) {
+      var i, tabcontent, tablinks;
+      tabcontent = document.getElementsByClassName("tabcontent");
+      for (i = 0; i < tabcontent.length; i++) {
+        tabcontent[i].style.display = "none";
+      }
+      tablinks = document.getElementsByClassName("tablinks");
+      for (i = 0; i < tablinks.length; i++) {
+        tablinks[i].className = tablinks[i].className.replace(" active", "");
+      }
+      document.getElementById(cityName).style.display = "block";
+      evt.currentTarget.className += " active";
+    }
+    </script>
 </body>
 </html>

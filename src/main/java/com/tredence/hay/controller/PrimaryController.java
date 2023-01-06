@@ -51,7 +51,7 @@ public class PrimaryController extends HttpServlet {
 	ManagePanelist mpnl;
 	String organizer_synthetic_key, panelist_synthetic_key;
 	ManageRounds mr;
-
+	Round rnd;
 	/**
      * Default constructor. 
      */
@@ -194,6 +194,45 @@ public class PrimaryController extends HttpServlet {
 				rd = request.getRequestDispatcher("/OrganizerHome.jsp?pnlid=I-" + id);
 				rd.forward(request, response);
 
+
+			}
+
+			else if(form_id.equals("createscrround")){
+				rnd=new Round();
+				rnd.setRound_synthetic_key("Round1");
+				rnd.setRound_Name(request.getParameter("roundname"));
+				rnd.setRound_type(request.getParameter("roundtype"));
+				rnd.setMode(request.getParameter("mode"));
+				rnd.setPanelist_id(request.getParameter("Panelist"));
+				rnd.setScheduled_on(request.getParameter("scheduled_on").concat(" ").concat(request.getParameter("timezone")));
+				rnd.setIsRescheduled((request.getParameter("rsch")==null?"N":request.getParameter("rsch")));
+				rnd.setDuration(request.getParameter("duration"));
+				rnd.setOrganizer_id(session.getAttribute("synthetic_key").toString());
+				rnd.setProfile_id(request.getParameter("profile_id"));
+				rnd.setStatus("Scheduled");
+				mr=new ManageRounds();
+
+				int id=mr.addNewRound(rnd);
+				String PID=request.getParameter("profile_id");
+				ArrayList<Round> rounds=new ArrayList<Round>();
+				mr=new ManageRounds();
+				ArrayList<Profile> profiles=new ArrayList<Profile>();
+				ArrayList<Organizer> orgs=new ArrayList<Organizer>();
+				ArrayList<Panelist> pnls=new ArrayList<Panelist>();
+				pf=new Profile();
+				mp=new ManageProfile();
+				profiles=mp.searchProfile("profile_id",PID);
+				request.setAttribute("profile",profiles.get(0));
+				rounds=mr.getAllRoundsOfProfile(PID);
+				request.setAttribute("rounds",rounds);
+				mo=new ManageOrganizer();
+				orgs=mo.getAllOrganizers();
+				mpnl=new ManagePanelist();
+				pnls=mpnl.getAllPanelists();
+				request.setAttribute("orgs",orgs);
+				request.setAttribute("pnls",pnls);
+				rd = request.getRequestDispatcher("/DetailedProfile.jsp");
+				rd.forward(request, response);;
 
 			}
 		}

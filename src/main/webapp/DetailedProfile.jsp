@@ -7,11 +7,39 @@
  <%@ page import = "com.tredence.hay.model.*" %>
  <%@ page import = "java.util.*" %>
 <head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <meta charset="ISO-8859-1">
 <title>H.A.Y::Login</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.6/js/standalone/selectize.min.js" integrity="sha256-+C0A5Ilqmu4QcSPxrlGpaZxJ04VjsRjKu+G82kl5UJk=" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.6/css/selectize.bootstrap3.min.css" integrity="sha256-ze/OEYGcFbPRmvCnrSeKbRTtjG4vGLHXgOqsyLFTRjg=" crossorigin="anonymous" />
 
 <link rel="stylesheet" href="css/style.css">
 <script src="js/index.js"></script>
+<style>
+.collapsible {
+  background-color: #11A3EB;
+  color: white;
+  cursor: pointer;
+  padding: 18px;
+  width: 90%;
+  border: none;
+  text-align: left;
+  outline: none;
+  font-size: 15px;
+}
+
+.active, .collapsible:hover {
+  background-color: #555;
+}
+
+.content {
+  padding: 0 18px;
+  display: none;
+  overflow: hidden;
+  background-color: #f1f1f1;
+}
+</style>
 </head>
 <body>
 	<div class="header">
@@ -279,27 +307,53 @@
         </tr>
     </table>
     </div>
-    <div style="float:right; width:50%; ">
+    <div style="float:right; width:50%; padding-left:50px ">
         <%
+            int panelist_type=0;
             ArrayList<Round> rounds=new ArrayList<Round>();
             rounds=(ArrayList<Round>) request.getAttribute("rounds");
-            if(rounds.size()==0){%>
+            if(rounds.size()==0){
+            panelist_type=0;
+            %>
+
                <center> <font color="green" size="3"> No interview rounds scheduled yet! <button type="button" onclick="showscrroundform()">Start now</button> </font> </center>
 
-        <%}else{%>
+        <%}else{
+             panelist_type=1;
+            for(int i=0;i<rounds.size();i++){
+        %>
+            <button type="button" class="collapsible"> <b>Round Type:</b> <%= rounds.get(i).getRound_type()%> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>Status:</b><%= rounds.get(i).getStatus()%></button>
+            <div class="content">
+              <b>Interviewed on:</b> <%= rounds.get(i).getScheduled_on()%> <br>
+              <b>Interviewed By:</b> <%= rounds.get(i).getPanelist_id()%>
+            </div>
+            <%}%>
+            <br>
+            <br>
+            <button type="button" onclick="showscrroundform()">Schedule Next Round</button>
+            <%}%>
 
-        <%}%>
+
         <br><br>
 
         <center>
         <div id="roundform" style="display:none">
+        <form action="Navigator" method="post">
+        <input type="hidden" name="form_id" value="createscrround">
+        <input type="hidden" name="profile_id" value="<%=pf.getProfile_sythetic_key()%>">
         <table id="scrroundform" >
             <th> <td colspan="2"> Create New Interview Round </td> </th>
             <tr>
                 <td>Round Name</td>
                 <td>
                     <select name="roundname">
+                        <% if (panelist_type == 0) {%>
                         <option value="Screening">Screening</option>
+                        <%}else{%>
+                        <option value="Round 1">Round 1</option>
+                        <option value="Round 2">Round 2</option>
+                        <option value="Round 3">Round 3</option>
+                        <%}%>
                     </select>
                 </td>
             </tr>
@@ -307,7 +361,13 @@
                 <td>Round Type</td>
                 <td>
                     <select name="roundtype">
+                        <% if (panelist_type == 0) {%>
                         <option value="HR Screening">HR Screening</option>
+                        <%}else{%>
+                        <option value="Technical">Technical</option>
+                        <option value="Business">Business</option>
+                        <option value="Leadership">Leadership</option>
+                        <%}%>
                     </select>
                 </td>
             </tr>
@@ -317,6 +377,7 @@
                     <td>
                     <select name="mode">
                         <option value="Telephonic">Telephonic</option>
+                        <option value="Teams">Teams</option>
                     </select>
                     </td>
 
@@ -324,14 +385,28 @@
             <tr>
 
                     <td>Panelist</td>
-                    <td><select name="Panelist" >
+                    <td>
+                        <% if (panelist_type == 0) {%>
+                        <select name="Panelist" >
                         <option value="Select">Select</option>
                         <%
                         ArrayList<Organizer> orgs=new ArrayList<Organizer>();
                         orgs=(ArrayList<Organizer>) request.getAttribute("orgs");
                         for(int i=0;i<orgs.size();i++){ %>
-                            <option value="<%=orgs.get(i).getOrganizer_synthetic_key()%>"><%=orgs.get(i).getEmail()%></option>
-                        <%}%></td>
+                            <option value="<%=orgs.get(i).getEmail()%>"><%=orgs.get(i).getEmail()%></option>
+                        <%}%>
+
+                        <%}else{%>
+							<select name="Panelist" >
+                            <option value="Select">Select</option>
+                            <% 
+                            ArrayList<Panelist> pnls=new ArrayList<Panelist>();
+                            pnls=(ArrayList<Panelist>) request.getAttribute("pnls");
+                            for(int i=0;i<pnls.size();i++){ %>
+                                <option value="<%=pnls.get(i).getEmail()%>"><%=pnls.get(i).getEmail()%></option>
+                            <%}%>
+                        <%}%>
+                     </td>
                     </select>
 
             </tr>
@@ -353,11 +428,54 @@
                     </td>
 
             </tr>
-        </table></div>
+            <tr>
+                    <td>Duration</td>
+                    <td><select name="duration">
+                            <option value="15 minutes">15 minutes</option>
+                            <option value="30 minutes">30 minutes</option>
+                            <option value="45 Minutes">45 Minutes</option>
+                            <option value="60 Minutes">60 Minutes</option>
+                        </select>
+                    </td>
+
+            </tr>
+            <tr>
+
+                                <td colspan="2" align="center">
+                                    <input type="submit" value="Confirm & Schedule"/>
+                                </td>
+
+                        </tr>
+        </table>
+        </form>
+
+        </div>
         </center>
 	</div>
+	<script>
+    var coll = document.getElementsByClassName("collapsible");
+    var i;
+
+    for (i = 0; i < coll.length; i++) {
+      coll[i].addEventListener("click", function() {
+        this.classList.toggle("active");
+        var content = this.nextElementSibling;
+        if (content.style.display === "block") {
+          content.style.display = "none";
+        } else {
+          content.style.display = "block";
+        }
+      });
+    }
+
+    </script>
 </body>
 <script>
+ $(document).ready(function () {
+      $('select').selectize({
+          sortField: ''
+      });
+  });
 function showscrroundform() {
 
 
@@ -369,5 +487,8 @@ function showscrroundform() {
     }
  return;
 }
+
+
 </script>
+
 </html>

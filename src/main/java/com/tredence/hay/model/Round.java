@@ -6,8 +6,25 @@ import java.util.Date;
 public class Round {
 
     BigInteger Round_id;
-    String Round_Name,panelist_id,organizer_id,profile_id,mode,isRescheduled,duration,round_type,panelist_name, organizer_name;
-    Date scheduled_on,last_updated;
+    String round_synthetic_key, Round_Name,panelist_id,organizer_id,profile_id,mode,isRescheduled,duration,round_type,panelist_name, organizer_name,scheduled_on, status;
+    Date last_updated;
+
+
+    public String getRound_synthetic_key() {
+        return round_synthetic_key;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public void setRound_synthetic_key(String round_synthetic_key) {
+        this.round_synthetic_key = round_synthetic_key;
+    }
 
     public String getPanelist_name() {
         return panelist_name;
@@ -100,11 +117,11 @@ public class Round {
         this.round_type = round_type;
     }
 
-    public Date getScheduled_on() {
+    public String getScheduled_on() {
         return scheduled_on;
     }
 
-    public void setScheduled_on(Date scheduled_on) {
+    public void setScheduled_on(String scheduled_on) {
         this.scheduled_on = scheduled_on;
     }
 
