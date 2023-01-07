@@ -326,6 +326,20 @@
             <div class="content">
               <b>Interviewed on:</b> <%= rounds.get(i).getScheduled_on()%> <br>
               <b>Interviewed By:</b> <%= rounds.get(i).getPanelist_id()%>
+              <br>
+              <%if(rounds.get(i).getStatus().equals("Scheduled")){%>
+
+              <form action="Navigator" method="post">
+                <input type="hidden" name="round_id" value="<%=rounds.get(i).getRound_synthetic_key()%>">
+                <input type="hidden" name="profile_id" value="<%=rounds.get(i).getProfile_id()%>">
+                <input type="hidden" name="org_syn_key" value="<%=rounds.get(i).getOrganizer_id()%>">
+                <input type="hidden" name="form_id" value="startround">
+                <input type="submit" value="Start Interview"/>
+              </form>
+              <%}else{%>
+              <a href="ViewFeedback.jsp?TaskId=<%=rounds.get(i).getRound_synthetic_key()%>&ProfileId=<%=rounds.get(i).getProfile_id()%>" target="new" onclick="openWin()">View Feedback</a>
+              <%}%>
+              <br>
             </div>
             <%}%>
             <br>
@@ -488,7 +502,9 @@ function showscrroundform() {
  return;
 }
 
-
+function openWin() {
+  myWindow = window.open("", "", "width=500, height=600");
+}
 </script>
 
 </html>

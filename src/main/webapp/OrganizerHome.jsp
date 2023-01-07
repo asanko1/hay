@@ -2,6 +2,10 @@
 	pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <html>
+ <%@ page import = "com.tredence.hay.config.*" %>
+ <%@ page import = "com.tredence.hay.controller.*" %>
+ <%@ page import = "com.tredence.hay.model.*" %>
+ <%@ page import = "java.util.*" %>
 <head>
 <meta charset="ISO-8859-1">
 <title>H.A.Y::Login</title>
@@ -97,8 +101,33 @@
         </div>
 
         <div id="London" class="tabcontent">
-          <h3>London</h3>
-          <p>London is the capital city of England.</p>
+          <h3>Tasks</h3>
+          <table width="80%" border="1">
+          <tr>
+            <td>TaskId</td>
+            <td>Candidate Id</td>
+            <td>Round Type</td>
+            <td>Interview Time</td>
+          </tr>
+
+          <%
+          ArrayList<Round> rounds= new ArrayList<Round>();
+          rounds=(ArrayList<Round>) session.getAttribute("rounds");
+          if(rounds.size()>0){
+          for(int i=0;i<rounds.size();i++){
+          %>
+            <tr>
+                <td><a href="Navigator?form_id=profiledetail&PID=<%=rounds.get(i).getProfile_id()%>"><%= rounds.get(i).getRound_synthetic_key()%></a></td>
+                <td><%=rounds.get(i).getProfile_id()%></td>
+                <td><%=rounds.get(i).getRound_type()%></td>
+                <td><%=rounds.get(i).getScheduled_on()%></td>
+              </tr>
+          <%}}else{%>
+          <tr>
+            <td colspan="4">Good Job! No Tasks for now!</td>
+          </tr>
+          <%}%>
+          </table>
         </div>
 
         <div id="Paris" class="tabcontent">

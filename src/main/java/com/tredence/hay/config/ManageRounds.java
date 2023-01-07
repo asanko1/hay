@@ -89,4 +89,42 @@ public class ManageRounds {
 
                 return id;
         }
+
+    public ArrayList<Round> getAllRoundsOfPanelist(String panelist_email){
+        ms=new ManageSQL();
+        sql=ms.getSQL(BigInteger.valueOf(23));
+        round=new Round();
+        conn=new DBConnection().getDBConnection();
+        try{
+            pstmt= conn.prepareStatement(sql);
+            pstmt.setString(1,panelist_email);
+            rs=pstmt.executeQuery();
+            while (rs.next()){
+                System.out.println(rs.getString(12));
+                round=new Round();
+
+                round.setRound_Name(rs.getString(2));
+                round.setPanelist_id(rs.getString(3));
+                round.setOrganizer_id(rs.getString(4));
+                round.setProfile_id(rs.getString(5));
+                round.setScheduled_on(rs.getString(6));
+                round.setMode(rs.getString(7));
+                round.setIsRescheduled(rs.getString(8));
+                round.setLast_updated(rs.getDate(9));
+                round.setDuration(rs.getString(10));
+                round.setRound_type(rs.getString(11));
+                round.setRound_synthetic_key(rs.getString(12));
+                mpnl=new ManagePanelist();
+                mo=new ManageOrganizer();
+                round.setPanelist_name(mpnl.getPanelistName(rs.getString(3)));
+                round.setOrganizer_name(mo.getOrganizerName(rs.getString(4)));
+                round.setStatus(rs.getString(13));
+                rounds.add(round);
+            }
+
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+        return rounds;
+    }
 }

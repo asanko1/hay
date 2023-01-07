@@ -52,6 +52,7 @@ public class PrimaryController extends HttpServlet {
 	String organizer_synthetic_key, panelist_synthetic_key;
 	ManageRounds mr;
 	Round rnd;
+	ManageFeedback mf;
 	/**
      * Default constructor. 
      */
@@ -117,21 +118,24 @@ public class PrimaryController extends HttpServlet {
 					session=request.getSession();
 					session.setAttribute("email",user.getEmail());
 					session.setAttribute("role",user.getRole());
-
+					ArrayList<Round> rounds=new ArrayList<Round>();
+					mr=new ManageRounds();
+					rounds=mr.getAllRoundsOfPanelist(user.getEmail());
+					session.setAttribute("rounds", rounds);
 					if(user.getRole().equals("Organizer")){
 						mo=new ManageOrganizer();
 						organizer_synthetic_key=mo.getOrganizerSyntheticKey(user.getEmail());
 						session.setAttribute("synthetic_key",organizer_synthetic_key);
-						rd = request.getRequestDispatcher("/OrganizerHome.jsp?u="+user.getEmail());
-						rd.forward(request, response);
+
 					}
 					else if(user.getRole().equals("Panelist")){
 						mpnl=new ManagePanelist();
 						panelist_synthetic_key=mpnl.getPanelistSyntheticKey(user.getEmail());
 						session.setAttribute("sythetic_key",panelist_synthetic_key);
-						rd = request.getRequestDispatcher("/PanelistHome.jsp?u="+user.getEmail());
-						rd.forward(request, response);
+
 					}
+					rd = request.getRequestDispatcher("/OrganizerHome.jsp?u="+user.getEmail());
+					rd.forward(request, response);
 				}
 				else {
 					rd = request.getRequestDispatcher("/index.jsp?e=login_fail");
@@ -235,15 +239,60 @@ public class PrimaryController extends HttpServlet {
 				rd.forward(request, response);;
 
 			}
+
+			else if(form_id.equals("startround")){
+				String TaskId=request.getParameter("round_id");
+				String profile_id=request.getParameter("profile_id");
+				String org_syn_key=request.getParameter("org_syn_key");
+				mo=new ManageOrganizer();
+				String teams_link=mo.getTeamsLink(org_syn_key);
+				request.setAttribute("teams_link",teams_link);
+				rd = request.getRequestDispatcher("/Feedback.jsp?TaskId="+TaskId+"&ProfileId="+profile_id);
+				rd.forward(request, response);;
+
+			}
+			else if(form_id.equals("finishround")){
+
+				Feedback fd=new Feedback();
+				fd.setRound_synthetic_key(request.getParameter("round_id"));
+				fd.setTech_Skill_Score(request.getParameter("skillset"));
+				fd.setBiz_Skill_Score(request.getParameter("biz"));
+				fd.setComm_Score(request.getParameter("comm"));
+				fd.setProposed_Employment_type(request.getParameter("emp_type"));
+				fd.setProposed_Designation(request.getParameter("desg"));
+				fd.setComment(request.getParameter("comment"));
+				fd.setResult(request.getParameter("result"));
+
+				mf=new ManageFeedback();
+				mf.addFeedback(fd);
+				String PID=request.getParameter("profile_id");
+				ArrayList<Round> rounds=new ArrayList<Round>();
+				mr=new ManageRounds();
+				ArrayList<Profile> profiles=new ArrayList<Profile>();
+				ArrayList<Organizer> orgs=new ArrayList<Organizer>();
+				ArrayList<Panelist> pnls=new ArrayList<Panelist>();
+				pf=new Profile();
+				mp=new ManageProfile();
+				profiles=mp.searchProfile("profile_id",PID);
+				request.setAttribute("profile",profiles.get(0));
+				rounds=mr.getAllRoundsOfProfile(PID);
+				request.setAttribute("rounds",rounds);
+				mo=new ManageOrganizer();
+				orgs=mo.getAllOrganizers();
+				mpnl=new ManagePanelist();
+				pnls=mpnl.getAllPanelists();
+				request.setAttribute("orgs",orgs);
+				request.setAttribute("pnls",pnls);
+				rd = request.getRequestDispatcher("/DetailedProfile.jsp");
+				rd.forward(request, response);;
+
+
+
+			}
 		}
 
 		
-		//else if(form_id.equals("addprof")){
 
-
-
-
-		//}
 	}
 
 }
