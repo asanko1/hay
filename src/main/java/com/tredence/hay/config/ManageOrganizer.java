@@ -125,4 +125,24 @@ public class ManageOrganizer {
 
         return organizer_synthetic_key;
     }
+
+    public String getTeamsLink(String org_syn_key){
+        String teams_link=null;
+        conn=new DBConnection().getDBConnection();
+        try {
+            ms = new ManageSQL();
+            sql = ms.getSQL(BigInteger.valueOf(24));
+            pstmt=conn.prepareStatement(sql);
+            pstmt.setString(1,org_syn_key);
+            rs=pstmt.executeQuery();
+            while(rs.next()){
+                teams_link=rs.getString(1);
+            }
+            conn.close();
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
+
+        return teams_link;
+    }
 }
