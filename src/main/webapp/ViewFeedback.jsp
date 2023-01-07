@@ -20,10 +20,59 @@
      <%@ page import = "com.tredence.hay.model.*" %>
      <%@ page import = "java.util.*" %>
     <body>
+    <%if(session.getAttribute("email")!=null){%>
+
+                        <font color="blue" size="5">Hi! <%=session.getAttribute("email")%></font>
+
+            <%}%>
+            <% if(session.getAttribute("email")==null){
+                                 response.sendRedirect("index.jsp");
+                   }%>
         <div class="header">
             <a href="#default" class="logo"><img src="images/logo.jpg"
                 width="90" height="90"></a>
+<div class="header-right" >
+			<div class="dropdown">
+				<button class="dropbtn">Home</button>
+				<div class="dropdown-content">
+                                    <a href="Navigator?form_id=returnhome">Dashboard</a>
+                                </div>
+			</div>
+            <%if(session.getAttribute("role").equals("Organizer")){%>
+			<div class="dropdown">
+				<button class="dropbtn">Profile</button>
+				<div class="dropdown-content">
+					<a href="AddProfile.jsp">Add New Profile</a>
+					<a href="SearchProfile.jsp">Manage Profile</a>
 
+				</div>
+			</div>
+			<div class="dropdown">
+				<button class="dropbtn">Organizer</button>
+				<div class="dropdown-content">
+					<a href="AddOrganizer.jsp">Add New Organizer</a>
+					<a href="#">Manage Organizer</a>
+
+				</div>
+			</div>
+			<div class="dropdown">
+				<button class="dropbtn">Panelist</button>
+				<div class="dropdown-content">
+					<a href="AddPanelist.jsp">Add New Panelist</a>
+					<a href="#">Manage Panelist</a>
+				</div>
+			</div>
+			<%}%>
+			<div class="dropdown">
+                <button class="dropbtn"><img src="images/logout.png" width="10" height="15"></button>
+                <div class="dropdown-content">
+                    <a href="Logout">Logout</a>
+
+                </div>
+
+            </div>
+
+		</div>
 
         </div>
          <% if(session.getAttribute("email")!=null){ %>

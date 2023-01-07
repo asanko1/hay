@@ -33,7 +33,7 @@ import com.tredence.hay.controller.FilePath;
 /**
  * Servlet implementation class PrimaryController
  */
-public class PrimaryController extends HttpServlet {
+public class PrimaryController extends HttpServlet implements FilePath {
 	private static final long serialVersionUID = 1L;
 	RequestDispatcher rd;
 	HttpSession session;
@@ -67,6 +67,7 @@ public class PrimaryController extends HttpServlet {
 		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 		String form_id=request.getParameter("form_id");
+		System.out.println(form_id);
 		ArrayList<Round> rounds=new ArrayList<Round>();
 		mr=new ManageRounds();
 		ArrayList<Profile> profiles=new ArrayList<Profile>();
@@ -86,8 +87,24 @@ public class PrimaryController extends HttpServlet {
 			pnls=mpnl.getAllPanelists();
 			request.setAttribute("orgs",orgs);
 			request.setAttribute("pnls",pnls);
+			List<UploadDetail> fileList=getResume(PID);
+			request.setAttribute("uploadedFiles", fileList);
 			rd = request.getRequestDispatcher("/DetailedProfile.jsp");
 			rd.forward(request, response);
+		}
+		else if(form_id.equals("returnhome")){
+			session=request.getSession();
+			rounds=new ArrayList<Round>();
+			mr=new ManageRounds();
+			if(session.getAttribute("email")==null){
+				rd = request.getRequestDispatcher("/index.jsp?");
+				rd.forward(request, response);
+			}else {
+				rounds = mr.getAllRoundsOfPanelist(session.getAttribute("email").toString());
+				session.setAttribute("rounds", rounds);
+				rd = request.getRequestDispatcher("/OrganizerHome.jsp?u=" + session.getAttribute("email").toString());
+				rd.forward(request, response);
+			}
 		}
 	}
 
@@ -235,6 +252,8 @@ public class PrimaryController extends HttpServlet {
 				pnls=mpnl.getAllPanelists();
 				request.setAttribute("orgs",orgs);
 				request.setAttribute("pnls",pnls);
+				List<UploadDetail> fileList=getResume(PID);
+				request.setAttribute("uploadedFiles", fileList);
 				rd = request.getRequestDispatcher("/DetailedProfile.jsp");
 				rd.forward(request, response);;
 
@@ -283,16 +302,45 @@ public class PrimaryController extends HttpServlet {
 				pnls=mpnl.getAllPanelists();
 				request.setAttribute("orgs",orgs);
 				request.setAttribute("pnls",pnls);
+				List<UploadDetail> fileList=getResume(PID);
+				request.setAttribute("uploadedFiles", fileList);
 				rd = request.getRequestDispatcher("/DetailedProfile.jsp");
 				rd.forward(request, response);;
 
 
 
 			}
+
 		}
 
 		
 
+	}
+
+	public List<UploadDetail> getResume(String profile_syn_key)
+	{
+		List<UploadDetail> fileList =null;
+				String docpath=config_path + File.separator + "Resume" + File.separator + profile_syn_key;
+		File fileUploadDirectory = new File(docpath);
+		System.out.println(docpath);
+		if (fileUploadDirectory.exists()) {
+			//System.out.println(docpath);
+			UploadDetail details = null;
+			File[] allFiles = fileUploadDirectory.listFiles();
+			 fileList = new ArrayList<UploadDetail>();
+
+			for (File file : allFiles) {
+				//System.out.println("here");
+				details = new UploadDetail();
+				details.setFileName(file.getName());
+				// System.out.println(details.getFileName());
+				details.setFileSize(file.length() / 1024);
+				fileList.add(details);
+			}
+
+
+		}
+		return fileList;
 	}
 
 }

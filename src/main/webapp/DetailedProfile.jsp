@@ -42,6 +42,14 @@
 </style>
 </head>
 <body>
+<%if(session.getAttribute("email")!=null){%>
+
+                    <font color="blue" size="5">Hi! <%=session.getAttribute("email")%></font>
+
+        <%}%>
+        <% if(session.getAttribute("email")==null){
+                             response.sendRedirect("index.jsp");
+               }%>
 	<div class="header">
 		<a href="#default" class="logo"><img src="images/logo.jpg"
 			width="90" height="90"></a>
@@ -49,9 +57,11 @@
 			<div class="header-right" >
 			<div class="dropdown">
 				<button class="dropbtn">Home</button>
-				
+				<div class="dropdown-content">
+                    <a href="Navigator?form_id=returnhome">Dashboard</a>
+                </div>
 			</div>
-
+                <%if(session.getAttribute("role").equals("Organizer")){%>
 			<div class="dropdown">
 				<button class="dropbtn">Profile</button>
 				<div class="dropdown-content">
@@ -75,6 +85,7 @@
 					<a href="#">Manage Panelist</a> 
 				</div>
 			</div>
+			<%}%>
 			<div class="dropdown">
                 <button class="dropbtn"><img src="images/logout.png" width="10" height="15"></button>
                 <div class="dropdown-content">
@@ -88,17 +99,11 @@
 	</div>
     <br>
         <div style="padding-left: 700px">
-        <% if(session.getAttribute("email")!=null){ %>
-                    <center>
-                    <font color="blue" size="5">Hi! <%=session.getAttribute("email")%></font>
-                    </center>
-        <%}else{
-                response.sendRedirect("index.jsp");
-            }
-        %>
+
 
         <%
             Profile pf =  (Profile) request.getAttribute("profile");
+            List<UploadDetail> uploadDetails = (List<UploadDetail>) request.getAttribute("uploadedFiles");
         %>
         </div>
 
@@ -290,8 +295,14 @@
         <tr></tr>
         <tr></tr>
          <tr>
-            <td colspan="3" align="left"> Download Resume &nbsp;</td>
-            <td>&nbsp;</td>
+
+            <td colspan="2" align="center">
+            <a id="downloadLink" class="test"
+                href="DownloadResume?form_id=downloadresume&fileName=<%=uploadDetails.get(0).getFileName()%>&profile_id=<%=pf.getProfile_sythetic_key()%>" width="20">Download Resume </a>
+
+            </td>
+            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+            <td></td>
             <td>Tag</td>
             <td>&nbsp;</td>
             <td>

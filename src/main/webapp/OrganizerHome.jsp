@@ -14,6 +14,14 @@
 <script src="js/index.js"></script>
 </head>
 <body>
+<%if(session.getAttribute("email")!=null){%>
+
+                    <font color="blue" size="5">Hi! <%=session.getAttribute("email")%></font>
+
+        <%}%>
+        <% if(session.getAttribute("email")==null){
+                             response.sendRedirect("index.jsp");
+               }%>
 	<div class="header">
 		<a href="#default" class="logo"><img src="images/logo.jpg"
 			width="90" height="90"></a>
@@ -21,9 +29,11 @@
 			<div class="header-right" >
 			<div class="dropdown">
 				<button class="dropbtn">Home</button>
-				
+				<div class="dropdown-content">
+                                    <a href="Navigator?form_id=returnhome">Dashboard</a>
+                                </div>
 			</div>
-
+            <%if(session.getAttribute("role").equals("Organizer")){%>
 			<div class="dropdown">
 				<button class="dropbtn">Profile</button>
 				<div class="dropdown-content">
@@ -47,6 +57,7 @@
 					<a href="#">Manage Panelist</a> 
 				</div>
 			</div>
+			<%}%>
 			<div class="dropdown">
                 <button class="dropbtn"><img src="images/logout.png" width="10" height="15"></button>
                 <div class="dropdown-content">
@@ -60,14 +71,7 @@
 	</div>
     <br>
         <div style="padding-left: 700px">
-        <% if(session.getAttribute("email")!=null){ %>
-                    <center>
-                    <font color="blue" size="5">Hi! <%=session.getAttribute("email")%></font>
-                    </center>
-        <%}else{
-                response.sendRedirect("index.jsp");
-            }
-        %>
+
         </div>
                         <% 	if(request.getParameter("dupid")!=null){%>
 
