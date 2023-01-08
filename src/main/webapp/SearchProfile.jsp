@@ -9,7 +9,7 @@
   <%@ page import = "java.io.*" %>
 <head>
 <meta charset="ISO-8859-1">
-<title>H.A.Y::Login</title>
+<title>H.A.Y::Search Profile</title>
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.13.1/datatables.min.css"/>
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.13.1/datatables.min.css"/>
 <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css"/>

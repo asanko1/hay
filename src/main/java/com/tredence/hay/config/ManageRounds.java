@@ -1,5 +1,6 @@
 package com.tredence.hay.config;
 
+import com.tredence.hay.model.HireRatio;
 import com.tredence.hay.model.Round;
 
 import java.math.BigInteger;
@@ -8,6 +9,7 @@ import java.util.ArrayList;
 
 public class ManageRounds {
 
+    HireRatio hr;
         public ArrayList<Round> rounds = new ArrayList<Round>();
         ManageSQL ms;
         String sql;
@@ -100,7 +102,147 @@ public class ManageRounds {
             pstmt.setString(1,panelist_email);
             rs=pstmt.executeQuery();
             while (rs.next()){
-                System.out.println(rs.getString(12));
+                System.out.println("rounds"+rs.getString(12));
+                round=new Round();
+
+                round.setRound_Name(rs.getString(2));
+                round.setPanelist_id(rs.getString(3));
+                round.setOrganizer_id(rs.getString(4));
+                round.setProfile_id(rs.getString(5));
+                round.setScheduled_on(rs.getString(6));
+                round.setMode(rs.getString(7));
+                round.setIsRescheduled(rs.getString(8));
+                round.setLast_updated(rs.getDate(9));
+                round.setDuration(rs.getString(10));
+                round.setRound_type(rs.getString(11));
+                round.setRound_synthetic_key(rs.getString(12));
+                mpnl=new ManagePanelist();
+                mo=new ManageOrganizer();
+                round.setPanelist_name(mpnl.getPanelistName(rs.getString(3)));
+                round.setOrganizer_name(mo.getOrganizerName(rs.getString(4)));
+                round.setStatus(rs.getString(13));
+                rounds.add(round);
+            }
+
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+        return rounds;
+    }
+
+    public HireRatio getTotalInterviewScheduled(String org_syn_key){
+        conn=new DBConnection().getDBConnection();
+
+        int count=0;
+        try{
+            ms=new ManageSQL();
+            sql=ms.getSQL(BigInteger.valueOf(32));
+            pstmt=conn.prepareStatement(sql);
+            pstmt.setString(1,org_syn_key);
+            pstmt.setString(2,"Scheduled");
+            pstmt.setString(3, "Completed");
+            pstmt.setString(4,"1900-01-01");
+            pstmt.setString(5, "4000-01-01");
+            rs=pstmt.executeQuery();
+            while(rs.next()){
+                hr=new HireRatio();
+                hr.setResult(rs.getString(1));
+                hr.setCount(rs.getInt(2));
+            }
+
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+        return hr;
+    }
+
+    public HireRatio getTotalScreeningTaken(String email){
+        conn=new DBConnection().getDBConnection();
+        int count=0;
+        try{
+            ms=new ManageSQL();
+            sql=ms.getSQL(BigInteger.valueOf(31));
+            pstmt=conn.prepareStatement(sql);
+            pstmt.setString(1,email);
+            pstmt.setString(2,"Completed");
+
+            pstmt.setString(3,"1900-01-01");
+            pstmt.setString(4, "4000-01-01");
+            rs=pstmt.executeQuery();
+            while(rs.next()){
+                hr=new HireRatio();
+                hr.setResult(rs.getString(1));
+                hr.setCount(rs.getInt(2));
+            }
+
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+        return hr;
+    }
+
+    public HireRatio getTotalInterviewTaken(String email){
+        conn=new DBConnection().getDBConnection();
+        int count=0;
+        try{
+            ms=new ManageSQL();
+            sql=ms.getSQL(BigInteger.valueOf(30));
+            pstmt=conn.prepareStatement(sql);
+            pstmt.setString(1,email);
+            pstmt.setString(2,"Completed");
+
+            pstmt.setString(3,"1900-01-01");
+            pstmt.setString(4, "4000-01-01");
+            rs=pstmt.executeQuery();
+            while(rs.next()){
+                hr=new HireRatio();
+                hr.setResult(rs.getString(1));
+                hr.setCount(rs.getInt(2));
+            }
+
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+        return hr;
+    }
+
+    public ArrayList<HireRatio> getHireRatio(String email){
+        conn=new DBConnection().getDBConnection();
+        ArrayList<HireRatio> hra=new ArrayList<HireRatio>();
+        int count=0;
+        try{
+            ms=new ManageSQL();
+            sql=ms.getSQL(BigInteger.valueOf(33));
+            pstmt=conn.prepareStatement(sql);
+            pstmt.setString(1,email);
+            pstmt.setString(2,"1900-01-01");
+            pstmt.setString(3, "4000-01-01");
+            rs=pstmt.executeQuery();
+            while(rs.next()){
+                hr=new HireRatio();
+                hr.setResult(rs.getString(1));
+                hr.setCount(rs.getInt(2));
+                hra.add(hr);
+            }
+
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+        return hra;
+    }
+
+    public ArrayList<Round> getAllRecentCompletedRounds(String org_syn_key){
+        ms=new ManageSQL();
+        sql=ms.getSQL(BigInteger.valueOf(34));
+        round=new Round();
+        conn=new DBConnection().getDBConnection();
+        rounds=new ArrayList<Round>();
+        try{
+            pstmt= conn.prepareStatement(sql);
+            pstmt.setString(1,org_syn_key);
+            rs=pstmt.executeQuery();
+            while (rs.next()){
+                System.out.println("comp round"+rs.getString(12));
                 round=new Round();
 
                 round.setRound_Name(rs.getString(2));

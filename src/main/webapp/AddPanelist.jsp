@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>H.A.Y::Login</title>
+<title>H.A.Y::Add New Panelist</title>
  <%@ page import = "com.tredence.hay.config.*" %>
  <%@ page import = "com.tredence.hay.controller.*" %>
  <%@ page import = "com.tredence.hay.model.*" %>

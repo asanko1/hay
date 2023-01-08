@@ -4,7 +4,7 @@
     <html>
     <head>
     <meta charset="ISO-8859-1">
-    <title>H.A.Y::Login</title>
+    <title>H.A.Y::Feedback</title>
 
     <link rel="stylesheet" href="css/style.css">
     <script src="js/index.js"></script>

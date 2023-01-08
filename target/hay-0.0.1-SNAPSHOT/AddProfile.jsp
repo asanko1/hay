@@ -4,12 +4,20 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>H.A.Y::Login</title>
+<title>H.A.Y::Add New Profile</title>
 
 <link rel="stylesheet" href="css/style.css">
 <script src="js/index.js"></script>
 </head>
 <body>
+<%if(session.getAttribute("email")!=null){%>
+
+                    <font color="blue" size="5">Hi! <%=session.getAttribute("email")%></font>
+
+        <%}%>
+        <% if(session.getAttribute("email")==null){
+                             response.sendRedirect("index.jsp");
+               }%>
 	<div class="header">
 		<a href="#default" class="logo"><img src="images/logo.jpg"
 			width="90" height="90"></a>
@@ -17,9 +25,11 @@
 			<div class="header-right" >
 			<div class="dropdown">
 				<button class="dropbtn">Home</button>
-				
+				<div class="dropdown-content">
+                                    <a href="Navigator?form_id=returnhome">Dashboard</a>
+                                </div>
 			</div>
-
+            <%if(session.getAttribute("role").equals("Organizer")){%>
 			<div class="dropdown">
 				<button class="dropbtn">Profile</button>
 				<div class="dropdown-content">
@@ -43,6 +53,7 @@
 					<a href="#">Manage Panelist</a> 
 				</div>
 			</div>
+			<%}%>
 			<div class="dropdown">
             				<button class="dropbtn"><img src="images/logout.png" width="10" height="15"></button>
                             <div class="dropdown-content">
@@ -55,14 +66,7 @@
 		</div>
 	</div>
     <br>
-        <%if(request.getParameter("u")!=null){%>
-                    
-                    <font color="blue" size="5">Hi! <%=request.getParameter("u")%></font>
-                    
-        <%}%>
-         <% if(session.getAttribute("email")==null){
-                                     response.sendRedirect("index.jsp");
-                       }%>
+
 
 	<div style="padding-left: 200px" >
 	
@@ -183,9 +187,13 @@
                     <tr></tr>
                     <tr></tr>
                      <tr>
-                        <td colspan="7" align="center"> Upload Resume &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="file" name="resume"></td>
+                        <td colspan="3" align="left"> Upload Resume &nbsp;<input type="file" name="resume"></td>
+                        <td>&nbsp;</td>
+                        <td>Tag</td>
+                        <td>&nbsp;</td>
+                        <td><input type="text" name="tag"/></td>
                      </tr>
-                    <tr>
+
                     <tr></tr>
                     <tr></tr>
                     <td colspan="7" align="center"><input type="submit" value="Create Profile"></td>

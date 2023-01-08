@@ -118,6 +118,7 @@ public class ManageOrganizer {
             while(rs.next()){
                 organizer_synthetic_key=rs.getString(1);
             }
+            System.out.println(organizer_synthetic_key);
             conn.close();
         }catch(SQLException e){
             e.printStackTrace();

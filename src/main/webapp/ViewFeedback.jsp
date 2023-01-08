@@ -4,7 +4,7 @@
     <html>
     <head>
     <meta charset="ISO-8859-1">
-    <title>H.A.Y::Login</title>
+    <title>H.A.Y::View Feedback</title>
  <%@ page import = "com.tredence.hay.config.*" %>
  <%@ page import = "com.tredence.hay.controller.*" %>
  <%@ page import = "com.tredence.hay.model.*" %>
@@ -128,7 +128,7 @@
 
                  <td>
                      <textarea name="skillset" id="skillset" rows="5" cols="30" readonly="readonly" > <%=fd.getTech_Skill_Score()%></textarea>
-                     <%System.out.println(fd.getTech_Skill_Score());%>
+
                  </td>
              </tr>
              <tr>
@@ -153,7 +153,7 @@
            <td>Additional Comment</td>
             <td >
             <textarea rows="5" cols="30" name="comment"  readonly="readonly"><%=fd.getComment()%></textarea>
-            <%System.out.println(fd.getComment());%>
+
             </td>
             </tr>
            

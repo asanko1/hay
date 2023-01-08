@@ -9,7 +9,7 @@
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta charset="ISO-8859-1">
-<title>H.A.Y::Login</title>
+<title>H.A.Y::Profile Detail</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.6/js/standalone/selectize.min.js" integrity="sha256-+C0A5Ilqmu4QcSPxrlGpaZxJ04VjsRjKu+G82kl5UJk=" crossorigin="anonymous"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.6/css/selectize.bootstrap3.min.css" integrity="sha256-ze/OEYGcFbPRmvCnrSeKbRTtjG4vGLHXgOqsyLFTRjg=" crossorigin="anonymous" />
@@ -355,7 +355,9 @@
             <%}%>
             <br>
             <br>
+            <%if(session.getAttribute("role").equals("Organizer")){%>
             <button type="button" onclick="showscrroundform()">Schedule Next Round</button>
+            <%}%>
             <%}%>
 
 
@@ -388,10 +390,12 @@
                     <select name="roundtype">
                         <% if (panelist_type == 0) {%>
                         <option value="HR Screening">HR Screening</option>
+
                         <%}else{%>
                         <option value="Technical">Technical</option>
                         <option value="Business">Business</option>
                         <option value="Leadership">Leadership</option>
+                        <option value="Offer-Negotation">Offer-Negotation</option>
                         <%}%>
                     </select>
                 </td>
