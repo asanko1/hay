@@ -1,10 +1,10 @@
 com\tredence\hay\model\Users.class
-com\tredence\hay\config\ManageUsers.class
 com\tredence\hay\config\DBConnection.class
-com\tredence\hay\controller\PrimaryController.class
-com\tredence\hay\config\ManageSQL.class
 com\tredence\hay\model\SQL.class
 com\tredence\hay\model\Panelist.class
+com\tredence\hay\config\ManageUsers.class
+com\tredence\hay\controller\PrimaryController.class
+com\tredence\hay\config\ManageSQL.class
 com\tredence\hay\config\ManageOrganizer.class
 com\tredence\hay\model\Profile.class
 com\tredence\hay\model\Organizer.class

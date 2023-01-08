@@ -8,12 +8,58 @@
  <%@ page import = "java.util.*" %>
 <head>
 <meta charset="ISO-8859-1">
-<title>H.A.Y::Login</title>
+<title>H.A.Y::Home</title>
 
 <link rel="stylesheet" href="css/style.css">
+<style>
+.tab {
+  overflow: hidden;
+  border: 1px solid #ccc;
+  background-color: #11A3EB;
+  width: 90%
+}
+
+/* Style the buttons inside the tab */
+.tab button {
+  background-color: inherit;
+  float: left;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 14px 16px;
+  transition: 0.3s;
+  font-size: 17px;
+}
+
+/* Change background color of buttons on hover */
+.tab button:hover {
+  background-color: #ddd;
+}
+
+/* Create an active/current tablink class */
+.tab button.active {
+  background-color: #ccc;
+}
+
+/* Style the tab content */
+.tabcontent {
+  display: none;
+  padding: 6px 12px;
+  border: 1px solid #ccc;
+  border-top: none;
+}
+</style>
 <script src="js/index.js"></script>
 </head>
 <body>
+<%if(session.getAttribute("email")!=null){%>
+
+                    <font color="blue" size="5">Hi! <%=session.getAttribute("email")%></font>
+
+        <%}%>
+        <% if(session.getAttribute("email")==null){
+                             response.sendRedirect("index.jsp");
+               }%>
 	<div class="header">
 		<a href="#default" class="logo"><img src="images/logo.jpg"
 			width="90" height="90"></a>
@@ -21,9 +67,11 @@
 			<div class="header-right" >
 			<div class="dropdown">
 				<button class="dropbtn">Home</button>
-				
+				<div class="dropdown-content">
+                                    <a href="Navigator?form_id=returnhome">Dashboard</a>
+                                </div>
 			</div>
-
+            <%if(session.getAttribute("role").equals("Organizer")){%>
 			<div class="dropdown">
 				<button class="dropbtn">Profile</button>
 				<div class="dropdown-content">
@@ -47,6 +95,7 @@
 					<a href="#">Manage Panelist</a> 
 				</div>
 			</div>
+			<%}%>
 			<div class="dropdown">
                 <button class="dropbtn"><img src="images/logout.png" width="10" height="15"></button>
                 <div class="dropdown-content">
@@ -60,14 +109,7 @@
 	</div>
     <br>
         <div style="padding-left: 700px">
-        <% if(session.getAttribute("email")!=null){ %>
-                    <center>
-                    <font color="blue" size="5">Hi! <%=session.getAttribute("email")%></font>
-                    </center>
-        <%}else{
-                response.sendRedirect("index.jsp");
-            }
-        %>
+
         </div>
                         <% 	if(request.getParameter("dupid")!=null){%>
 
@@ -95,12 +137,12 @@
     <br>
 	<div style="padding-left: 20px">
 		<div class="tab" >
-          <button class="tablinks" onclick="openCity(event, 'London')">My Tasks</button>
-          <button class="tablinks" onclick="openCity(event, 'Paris')">My Reports</button>
+          <button class="tablinks" onclick="openCity(event, 'mytasks')">My Tasks</button>
+          <button class="tablinks" onclick="openCity(event, 'myreports')">My Reports</button>
           <button class="tablinks" onclick="openCity(event, 'Tokyo')">Leadership Reports</button>
         </div>
 
-        <div id="London" class="tabcontent">
+        <div id="mytasks" class="tabcontent" style="display:none">
           <h3>Tasks</h3>
           <table width="80%" border="1">
           <tr>
@@ -111,8 +153,10 @@
           </tr>
 
           <%
+
           ArrayList<Round> rounds= new ArrayList<Round>();
           rounds=(ArrayList<Round>) session.getAttribute("rounds");
+          System.out.println(rounds.size() );
           if(rounds.size()>0){
           for(int i=0;i<rounds.size();i++){
           %>
@@ -128,19 +172,92 @@
           </tr>
           <%}%>
           </table>
+            <%if(session.getAttribute("role").equals("Organizer")){%>
+          <table width="80%" border="1">
+          <h3>Recent Completed Interviews Scheduled by Me </h3>
+            <tr>
+              <td>Round</td>
+              <td>Candidate Id</td>
+              <td>Round Type</td>
+              <td>Interview Time</td>
+            </tr>
+
+            <%
+
+            rounds= new ArrayList<Round>();
+            rounds=(ArrayList<Round>) session.getAttribute("rounds_2");
+            System.out.println(rounds.size() );
+            if(rounds.size()>0){
+            for( int i=0;i<rounds.size();i++){
+            %>
+              <tr>
+                  <td><a href="Navigator?form_id=profiledetail&PID=<%=rounds.get(i).getProfile_id()%>"><%= rounds.get(i).getRound_synthetic_key()%></a></td>
+                  <td><%=rounds.get(i).getProfile_id()%></td>
+                  <td><%=rounds.get(i).getRound_type()%></td>
+                  <td><%=rounds.get(i).getScheduled_on()%></td>
+                </tr>
+            <%}}else{%>
+            <tr>
+              <td colspan="4">Good Job! No Tasks for now!</td>
+            </tr>
+            <%}%>
+            </table>
+            <%}%>
         </div>
 
-        <div id="Paris" class="tabcontent">
-          <h3>Paris</h3>
-          <p>Paris is the capital of France.</p>
+        <div id="myreports" class="tabcontent" style="display:none">
+          <h3>My Stats</h3>
+          <%if(session.getAttribute("role").equals("Organizer")){
+        	  HireRatio TotalProfileCreated=(HireRatio) session.getAttribute("TotalProfileCreated");
+        	  HireRatio TotalInterviewScheduled=(HireRatio) session.getAttribute("TotalInterviewScheduled");
+        	  HireRatio TotalScreeningTaken=(HireRatio) session.getAttribute("TotalScreeningTaken");
+          %>
+          <table border="1">
+          	<tr>
+          	<td><%=TotalProfileCreated.getResult() %> </td>
+          	<td><%=TotalProfileCreated.getCount() %></td>
+          	</tr>
+          	<tr>
+          	<td><%=TotalInterviewScheduled.getResult() %> </td>
+          	<td><%=TotalInterviewScheduled.getCount() %></td>
+          	</tr>
+          	<tr>
+          	<td><%=TotalScreeningTaken.getResult() %> </td>
+          	<td><%=TotalScreeningTaken.getCount() %></td>
+          	</tr>
+          </table>
+
+          <%}
+          else if(session.getAttribute("role").equals("Panelist")){
+                HireRatio TotalInterviewTaken=(HireRatio) session.getAttribute("TotalInterviewTaken");
+                ArrayList<HireRatio> hra=(ArrayList<HireRatio>) session.getAttribute("HireRatio");%>
+
+                <table border="1">
+                          	<tr>
+                          	<td><%=TotalInterviewTaken.getResult() %> </td>
+                          	<td><%=TotalInterviewTaken.getCount() %></td>
+                          	</tr>
+                          	<tr>
+                          	<td>Hiring Ratio </td>
+                          	<td>
+                          	<%for(int i=0;i<hra.size();i++){%>
+                          	<%=hra.get(i).getResult()%>: <%=hra.get(i).getCount()%> <br>
+
+                          	<%}%>
+                          	</td>
+                          	</tr>
+                          	</table>
+          <%}%>
         </div>
 
-        <div id="Tokyo" class="tabcontent">
+        <div id="Tokyo" class="tabcontent" style="display:none">
           <h3>Tokyo</h3>
           <p>Tokyo is the capital of Japan.</p>
         </div>
 	</div>
-	<script>
+
+</body>
+<script>
     function openCity(evt, cityName) {
       var i, tabcontent, tablinks;
       tabcontent = document.getElementsByClassName("tabcontent");
@@ -155,5 +272,4 @@
       evt.currentTarget.className += " active";
     }
     </script>
-</body>
 </html>

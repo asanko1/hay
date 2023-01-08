@@ -1,5 +1,6 @@
 package com.tredence.hay.config;
 
+import com.tredence.hay.model.HireRatio;
 import com.tredence.hay.model.Profile;
 import com.tredence.hay.model.Users;
 
@@ -186,5 +187,29 @@ public class ManageProfile {
 
         return profiles;
 
+    }
+
+    public HireRatio getTotalProfileCreated(String email){
+        conn=new DBConnection().getDBConnection();
+        HireRatio hr=new HireRatio();
+        int count=0;
+        try{
+            ms=new ManageSQL();
+            sql=ms.getSQL(BigInteger.valueOf(29));
+            pstmt=conn.prepareStatement(sql);
+            pstmt.setString(1,email);
+            pstmt.setString(2,"1900-01-01");
+            pstmt.setString(3, "4000-01-01");
+            rs=pstmt.executeQuery();
+            while(rs.next()){
+
+                hr.setResult(rs.getString(1));
+                hr.setCount(rs.getInt(2));
+            }
+
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+        return hr;
     }
 }

@@ -93,7 +93,7 @@ public class ProfileCreateController extends HttpServlet implements FilePath{
 						pf.setPrimary_phn(value);
 					}
 					else if(fieldName.equals("email")){
-						pf.setPrimary_email(value);
+						pf.setPrimary_email(value.toLowerCase());
 					}
 					else if(fieldName.equals("city")){
 						pf.setCity(value);

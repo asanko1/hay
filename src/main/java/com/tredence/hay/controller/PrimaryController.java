@@ -33,7 +33,7 @@ import com.tredence.hay.controller.FilePath;
 /**
  * Servlet implementation class PrimaryController
  */
-public class PrimaryController extends HttpServlet {
+public class PrimaryController extends HttpServlet implements FilePath {
 	private static final long serialVersionUID = 1L;
 	RequestDispatcher rd;
 	HttpSession session;
@@ -67,6 +67,7 @@ public class PrimaryController extends HttpServlet {
 		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 		String form_id=request.getParameter("form_id");
+		System.out.println(form_id);
 		ArrayList<Round> rounds=new ArrayList<Round>();
 		mr=new ManageRounds();
 		ArrayList<Profile> profiles=new ArrayList<Profile>();
@@ -86,8 +87,27 @@ public class PrimaryController extends HttpServlet {
 			pnls=mpnl.getAllPanelists();
 			request.setAttribute("orgs",orgs);
 			request.setAttribute("pnls",pnls);
+			List<UploadDetail> fileList=getResume(PID);
+			request.setAttribute("uploadedFiles", fileList);
 			rd = request.getRequestDispatcher("/DetailedProfile.jsp");
 			rd.forward(request, response);
+		}
+		else if(form_id.equals("returnhome")){
+			session=request.getSession();
+			rounds=new ArrayList<Round>();
+			mr=new ManageRounds();
+
+			if(session.getAttribute("email")==null){
+				rd = request.getRequestDispatcher("/index.jsp?");
+				rd.forward(request, response);
+			}else {
+
+				rounds = mr.getAllRoundsOfPanelist(session.getAttribute("email").toString());
+				session.setAttribute("rounds", rounds);
+
+				rd = request.getRequestDispatcher("/OrganizerHome.jsp?u=" + session.getAttribute("email").toString());
+				rd.forward(request, response);
+			}
 		}
 	}
 
@@ -121,17 +141,26 @@ public class PrimaryController extends HttpServlet {
 					ArrayList<Round> rounds=new ArrayList<Round>();
 					mr=new ManageRounds();
 					rounds=mr.getAllRoundsOfPanelist(user.getEmail());
+
 					session.setAttribute("rounds", rounds);
 					if(user.getRole().equals("Organizer")){
 						mo=new ManageOrganizer();
 						organizer_synthetic_key=mo.getOrganizerSyntheticKey(user.getEmail());
 						session.setAttribute("synthetic_key",organizer_synthetic_key);
+						ArrayList<Round> rounds_2=new ArrayList<Round>();
+						rounds_2=mr.getAllRecentCompletedRounds(session.getAttribute("synthetic_key").toString());
+						session.setAttribute("rounds_2", rounds_2);
 
+						session.setAttribute("TotalProfileCreated",getTotalProfileCreated(session.getAttribute("email").toString()));
+						session.setAttribute("TotalInterviewScheduled",getInterviewScheduled(session.getAttribute("synthetic_key").toString()));
+						session.setAttribute("TotalScreeningTaken",getScreeningCompleted(session.getAttribute("email").toString()));
 					}
 					else if(user.getRole().equals("Panelist")){
 						mpnl=new ManagePanelist();
 						panelist_synthetic_key=mpnl.getPanelistSyntheticKey(user.getEmail());
 						session.setAttribute("sythetic_key",panelist_synthetic_key);
+						session.setAttribute("TotalInterviewTaken",getInterviewCompleted(session.getAttribute("email").toString()));
+						session.setAttribute("HireRatio",getHireRatio(session.getAttribute("email").toString()));
 
 					}
 					rd = request.getRequestDispatcher("/OrganizerHome.jsp?u="+user.getEmail());
@@ -164,7 +193,7 @@ public class PrimaryController extends HttpServlet {
 				 org.setOrganizer_synthetic_key("Org1");
 				org.setFirst_name(request.getParameter("fname"));
 				org.setLast_name(request.getParameter("lname"));
-				org.setEmail(request.getParameter("email"));
+				org.setEmail(request.getParameter("email").toLowerCase());
 				org.setPhone(request.getParameter("phn"));
 				org.setCity(request.getParameter("city"));
 				org.setCountry(request.getParameter("country"));
@@ -184,7 +213,7 @@ public class PrimaryController extends HttpServlet {
 				pnl.setPanelist_synthetic_key("pnl1");
 				pnl.setFirst_name(request.getParameter("fname"));
 				pnl.setLast_name(request.getParameter("lname"));
-				pnl.setEmail(request.getParameter("email"));
+				pnl.setEmail(request.getParameter("email").toLowerCase());
 				pnl.setPhone(request.getParameter("phn"));
 				pnl.setCity(request.getParameter("city"));
 				pnl.setCountry(request.getParameter("country"));
@@ -235,6 +264,8 @@ public class PrimaryController extends HttpServlet {
 				pnls=mpnl.getAllPanelists();
 				request.setAttribute("orgs",orgs);
 				request.setAttribute("pnls",pnls);
+				List<UploadDetail> fileList=getResume(PID);
+				request.setAttribute("uploadedFiles", fileList);
 				rd = request.getRequestDispatcher("/DetailedProfile.jsp");
 				rd.forward(request, response);;
 
@@ -283,16 +314,82 @@ public class PrimaryController extends HttpServlet {
 				pnls=mpnl.getAllPanelists();
 				request.setAttribute("orgs",orgs);
 				request.setAttribute("pnls",pnls);
+				List<UploadDetail> fileList=getResume(PID);
+				request.setAttribute("uploadedFiles", fileList);
 				rd = request.getRequestDispatcher("/DetailedProfile.jsp");
 				rd.forward(request, response);;
 
 
 
 			}
+
 		}
 
 		
 
+	}
+
+	public List<UploadDetail> getResume(String profile_syn_key)
+	{
+		List<UploadDetail> fileList =null;
+				String docpath=config_path + File.separator + "Resume" + File.separator + profile_syn_key;
+		File fileUploadDirectory = new File(docpath);
+		System.out.println(docpath);
+		if (fileUploadDirectory.exists()) {
+			//System.out.println(docpath);
+			UploadDetail details = null;
+			File[] allFiles = fileUploadDirectory.listFiles();
+			 fileList = new ArrayList<UploadDetail>();
+
+			for (File file : allFiles) {
+				//System.out.println("here");
+				details = new UploadDetail();
+				details.setFileName(file.getName());
+				// System.out.println(details.getFileName());
+				details.setFileSize(file.length() / 1024);
+				fileList.add(details);
+			}
+
+
+		}
+		return fileList;
+	}
+
+	public HireRatio getTotalProfileCreated(String email)
+	{
+		mp=new ManageProfile();
+		HireRatio total_profile_created=new HireRatio();
+		total_profile_created=mp.getTotalProfileCreated(email);
+
+		return  total_profile_created;
+	}
+
+	public HireRatio getInterviewScheduled(String organizer_synthetic_key){
+		mr=new ManageRounds();
+		HireRatio total_interview_scheduled=new HireRatio();
+		total_interview_scheduled=mr.getTotalInterviewScheduled(organizer_synthetic_key);
+		return  total_interview_scheduled;
+	}
+
+	public HireRatio getInterviewCompleted(String email){
+		mr=new ManageRounds();
+		HireRatio total_interview_completed=new HireRatio();
+		total_interview_completed=mr.getTotalInterviewTaken(email);
+		return  total_interview_completed;
+	}
+
+	public HireRatio getScreeningCompleted(String email){
+		mr=new ManageRounds();
+		HireRatio total_screening_completed=new HireRatio();
+		total_screening_completed=mr.getTotalScreeningTaken(email);
+		return  total_screening_completed;
+	}
+
+	public ArrayList<HireRatio> getHireRatio(String email){
+		mr=new ManageRounds();
+		ArrayList<HireRatio> hra=new ArrayList<HireRatio>();
+		hra=mr.getHireRatio(email);
+		return hra;
 	}
 
 }
