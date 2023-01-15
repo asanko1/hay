@@ -366,7 +366,7 @@
                 <input type="submit" value="Start Interview"/>
               </form>
               <%}else{%>
-              <a href="ViewFeedback.jsp?TaskId=<%=rounds.get(i).getRound_synthetic_key()%>&ProfileId=<%=rounds.get(i).getProfile_id()%>" target="new" onclick="openWin()">View Feedback</a>
+              <a href="ViewFeedback.jsp?TaskId=<%=rounds.get(i).getRound_synthetic_key()%>&ProfileId=<%=rounds.get(i).getProfile_id()%>" target="_new" >View Feedback</a>
               <%}%>
               <br>
             </div>
