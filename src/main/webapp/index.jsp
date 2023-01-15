@@ -56,7 +56,7 @@
 				<td align="center">
 				<select name="userid" id="userid" >
 				    <option value="">Please select your email address</option>
-				    <%for(int i=1;i<users.size();i++){
+				    <%for(int i=0;i<users.size();i++){
 
 				    %>
 				        <option value="<%=users.get(i).getEmail()%>"><%=users.get(i).getEmail()%></option>
