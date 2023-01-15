@@ -54,8 +54,8 @@
 				<td>Email</td>
 				<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
 				<td align="center">
-				<select name="userid" id="userid">
-				    <option value="">Select</option>
+				<select name="userid" id="userid" >
+				    <option value="">Please select your email address</option>
 				    <%for(int i=1;i<users.size();i++){
 
 				    %>
@@ -86,7 +86,7 @@
 </body>
 <script>
   $(document).ready(function () {
-      $('userid').selectize({
+      $('select').selectize({
           sortField: ''
       });
   });
