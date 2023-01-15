@@ -153,8 +153,10 @@
           </tr>
 
           <%
+
           ArrayList<Round> rounds= new ArrayList<Round>();
           rounds=(ArrayList<Round>) session.getAttribute("rounds");
+          System.out.println(rounds.size() );
           if(rounds.size()>0){
           for(int i=0;i<rounds.size();i++){
           %>
@@ -170,6 +172,37 @@
           </tr>
           <%}%>
           </table>
+            <%if(session.getAttribute("role").equals("Organizer")){%>
+          <table width="80%" border="1">
+          <h3>Recent Completed Interviews Scheduled by Me </h3>
+            <tr>
+              <td>Round</td>
+              <td>Candidate Id</td>
+              <td>Round Type</td>
+              <td>Interview Time</td>
+            </tr>
+
+            <%
+
+            rounds= new ArrayList<Round>();
+            rounds=(ArrayList<Round>) session.getAttribute("rounds_2");
+            System.out.println(rounds.size() );
+            if(rounds.size()>0){
+            for( int i=0;i<rounds.size();i++){
+            %>
+              <tr>
+                  <td><a href="Navigator?form_id=profiledetail&PID=<%=rounds.get(i).getProfile_id()%>"><%= rounds.get(i).getRound_synthetic_key()%></a></td>
+                  <td><%=rounds.get(i).getProfile_id()%></td>
+                  <td><%=rounds.get(i).getRound_type()%></td>
+                  <td><%=rounds.get(i).getScheduled_on()%></td>
+                </tr>
+            <%}}else{%>
+            <tr>
+              <td colspan="4">Good Job! No Tasks for now!</td>
+            </tr>
+            <%}%>
+            </table>
+            <%}%>
         </div>
 
         <div id="myreports" class="tabcontent" style="display:none">

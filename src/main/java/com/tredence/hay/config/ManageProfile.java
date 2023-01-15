@@ -212,4 +212,25 @@ public class ManageProfile {
         }
         return hr;
     }
+
+    public String getCandidateLinkedIn(String profile_synthetic_key){
+        String linkedin=null, github=null;
+        conn=new DBConnection().getDBConnection();
+        try {
+            ms = new ManageSQL();
+            sql = ms.getSQL(BigInteger.valueOf(35));
+            pstmt=conn.prepareStatement(sql);
+            pstmt.setString(1,profile_synthetic_key);
+            rs=pstmt.executeQuery();
+            while(rs.next()){
+                linkedin=rs.getString(1);
+                github=rs.getString(2);
+            }
+            conn.close();
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
+
+        return linkedin+";"+github;
+    }
 }
