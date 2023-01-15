@@ -5,7 +5,13 @@ import java.util.Date;
 
 public class Panelist {
 	BigInteger panelist_id;
-	String panelist_synthetic_key, first_name, last_name, city, country, timezone, email, skillset, Phone,  linkedin_url,leadership_profile, dept;
+	String panelist_synthetic_key, first_name, last_name, city, country, timezone, email, skillset, Phone,  linkedin_url,leadership_profile, dept,panelist_email;
+	public String getPanelist_email() {
+		return panelist_email;
+	}
+	public void setPanelist_email(String panelist_email) {
+		this.panelist_email = panelist_email;
+	}
 	Date last_updated;
 	public Panelist() {
 		super();

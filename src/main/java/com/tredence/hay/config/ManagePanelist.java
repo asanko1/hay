@@ -91,8 +91,8 @@ public class ManagePanelist {
 
 
     }
-    public String getPanelistName(String panelist_id){
-        String panelist_name=null;
+    public String getPanelistEmail(String panelist_id){
+        String email=null;
         conn=new DBConnection().getDBConnection();
         try {
             ms = new ManageSQL();
@@ -101,14 +101,14 @@ public class ManagePanelist {
             pstmt.setString(1,panelist_id);
             rs=pstmt.executeQuery();
             while(rs.next()){
-                panelist_name=rs.getString(1);
+            	email=rs.getString(1);
             }
             conn.close();
         }catch(SQLException e){
             e.printStackTrace();
         }
 
-        return panelist_name;
+        return email;
     }
 
     public String getPanelistSyntheticKey(String email){
@@ -129,5 +129,45 @@ public class ManagePanelist {
         }
 
         return panelist_synthetic_key;
+    }
+
+    public String getPanelistLinkedIn(String email){
+        String linkedin=null;
+        conn=new DBConnection().getDBConnection();
+        try {
+            ms = new ManageSQL();
+            sql = ms.getSQL(BigInteger.valueOf(36));
+            pstmt=conn.prepareStatement(sql);
+            pstmt.setString(1,email);
+            rs=pstmt.executeQuery();
+            while(rs.next()){
+                linkedin=rs.getString(1);
+            }
+            conn.close();
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
+
+        return linkedin;
+    }
+    
+    public String getPanelistName(String panelist_id){
+        String panelist_name=null;
+        conn=new DBConnection().getDBConnection();
+        try {
+            ms = new ManageSQL();
+            sql = ms.getSQL(BigInteger.valueOf(36));
+            pstmt=conn.prepareStatement(sql);
+            pstmt.setString(1,panelist_id);
+            rs=pstmt.executeQuery();
+            while(rs.next()){
+                panelist_name=rs.getString(1);
+            }
+            conn.close();
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
+
+        return panelist_name;
     }
 }

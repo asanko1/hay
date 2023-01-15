@@ -10,6 +10,10 @@
  <%@ page import = "com.tredence.hay.controller.*" %>
  <%@ page import = "com.tredence.hay.model.*" %>
  <%@ page import = "java.util.*" %>
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.6/js/standalone/selectize.min.js" integrity="sha256-+C0A5Ilqmu4QcSPxrlGpaZxJ04VjsRjKu+G82kl5UJk=" crossorigin="anonymous"></script>
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.6/css/selectize.bootstrap3.min.css" integrity="sha256-ze/OEYGcFbPRmvCnrSeKbRTtjG4vGLHXgOqsyLFTRjg=" crossorigin="anonymous" />
+
 <link rel="stylesheet" href="css/style.css">
 <script src="js/index.js"></script>
 </head>
@@ -50,7 +54,7 @@
 				<td>Email</td>
 				<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
 				<td align="center">
-				<select name="userid">
+				<select name="userid" id="userid">
 				    <option value="">Select</option>
 				    <%for(int i=1;i<users.size();i++){
 
@@ -64,10 +68,10 @@
 				<td>Role</td>
 				<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
 				<td align="center">
-					<select name="role">
+					<select name="role" >
 						<option>Select</option>
-						<option>Organizer</option>
-						<option>Panelist</option>
+						<option value="Organizer">Organizer</option>
+						<option value="Panelist">Panelist</option>
 					</select>
 				</td>
 			</tr>
@@ -80,4 +84,11 @@
 		</form>
 	</div>
 </body>
+<script>
+  $(document).ready(function () {
+      $('userid').selectize({
+          sortField: ''
+      });
+  });
+  </script>
 </html>

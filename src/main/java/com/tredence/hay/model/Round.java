@@ -6,9 +6,40 @@ import java.util.Date;
 public class Round {
 
     BigInteger Round_id;
-    String round_synthetic_key, Round_Name,panelist_id,organizer_id,profile_id,mode,isRescheduled,duration,round_type,panelist_name, organizer_name,scheduled_on, status;
-    Date last_updated;
+    String round_synthetic_key, Round_Name,panelist_id,organizer_id,profile_id,mode,isRescheduled,duration,round_type,panelist_name, organizer_name,scheduled_on, status, linkedin,github,panelist_email,linkedin_panelist;
+    public String getLinkedin_panelist() {
+		return linkedin_panelist;
+	}
 
+	public void setLinkedin_panelist(String linkedin_panelist) {
+		this.linkedin_panelist = linkedin_panelist;
+	}
+
+	public String getPanelist_email() {
+		return panelist_email;
+	}
+
+	public void setPanelist_email(String panelist_email) {
+		this.panelist_email = panelist_email;
+	}
+
+	Date last_updated;
+
+    public String getLinkedin() {
+        return linkedin;
+    }
+
+    public void setLinkedin(String linkedin) {
+        this.linkedin = linkedin;
+    }
+
+    public String getGithub() {
+        return github;
+    }
+
+    public void setGithub(String github) {
+        this.github = github;
+    }
 
     public String getRound_synthetic_key() {
         return round_synthetic_key;

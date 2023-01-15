@@ -331,15 +331,33 @@
 
         <%}else{
              panelist_type=1;
+             String msg=null;
             for(int i=0;i<rounds.size();i++){
+            ManagePanelist mp=new ManagePanelist();
+            String panelist_name=mp.getPanelistName(rounds.get(i).getPanelist_id());
+             msg = "Dear Candidate,"+ "\n"+
+                   "Thank you for your time to discuss the position with us. We would like to setup a time with you to understand your experience and expertise better."+"\n"+
+                   "We look forward talking with you!"+"\n"+
+                   "Candidate Id: "+rounds.get(i).getProfile_id()+"\n"+
+                   "Candidate Name: "+pf.getFirst_name()+" "+pf.getLast_name()+"\n"+
+				   "Candidate LinkedIn: "+rounds.get(i).getLinkedin()+"\n"+
+				   "Candidate LinkedIn: "+rounds.get(i).getGithub()+"\n"+
+                   "Panelist Name: "+rounds.get(i).getPanelist_id()+"\n"+
+				   "Panelist LinkedIn: "+rounds.get(i).getLinkedin_panelist()+"\n\n"+
+                   "Thank you"+"\n"+
+				   "Tredence Recruiting Team";
+                   
         %>
             <button type="button" class="collapsible"> <b>Round Type:</b> <%= rounds.get(i).getRound_type()%> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>Status:</b><%= rounds.get(i).getStatus()%></button>
             <div class="content">
               <b>Interviewed on:</b> <%= rounds.get(i).getScheduled_on()%> <br>
               <b>Interviewed By:</b> <%= rounds.get(i).getPanelist_id()%>
+              <input type="hidden" value="<%=msg%>" name="msg<%=i%>" id="msg<%=i%>">
               <br>
               <%if(rounds.get(i).getStatus().equals("Scheduled")){%>
-
+              <%if(session.getAttribute("role").equals("Organizer")){%>
+              <button onclick="copyMessage('msg<%=i%>')">Copy Message</button>
+              <%}%>
               <form action="Navigator" method="post">
                 <input type="hidden" name="round_id" value="<%=rounds.get(i).getRound_synthetic_key()%>">
                 <input type="hidden" name="profile_id" value="<%=rounds.get(i).getProfile_id()%>">
@@ -519,6 +537,21 @@ function showscrroundform() {
 
 function openWin() {
   myWindow = window.open("", "", "width=500, height=600");
+}
+
+function copyMessage(msgid) {
+  // Get the text field
+  var copyText = document.getElementById(msgid);
+
+  // Select the text field
+  //copyText.select();
+  //copyText.setSelectionRange(0, 99999); // For mobile devices
+
+   // Copy the text inside the text field
+  navigator.clipboard.writeText(copyText.value);
+
+  // Alert the copied text
+
 }
 </script>
 

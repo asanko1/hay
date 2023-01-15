@@ -20,6 +20,7 @@ public class ManageRounds {
         ManagePanelist mpnl;
         ManageOrganizer mo;
         Statement stmt;
+        ManageProfile mp=new ManageProfile();
         int id;
 
         public ArrayList<Round> getAllRoundsOfProfile(String profile_id){
@@ -27,6 +28,8 @@ public class ManageRounds {
             sql=ms.getSQL(BigInteger.valueOf(15));
             round=new Round();
             conn=new DBConnection().getDBConnection();
+            mp=new ManageProfile();
+            String artifacts[]=null;
             try{
                 pstmt= conn.prepareStatement(sql);
                 pstmt.setString(1,profile_id);
@@ -48,8 +51,14 @@ public class ManageRounds {
                     round.setRound_synthetic_key(rs.getString(12));
                     mpnl=new ManagePanelist();
                     mo=new ManageOrganizer();
-                    round.setPanelist_name(mpnl.getPanelistName(rs.getString(3)));
+                    //round.setPanelist_email(mpnl.getPanelistEmail(rs.getString(3)));
+                    //round.setPanelist_name(mpnl.getPanelistName(rs.getString(3)));
                     round.setOrganizer_name(mo.getOrganizerName(rs.getString(4)));
+                    artifacts=mp.getCandidateLinkedIn(profile_id).split(";");
+                    round.setLinkedin(profile_id);
+                    round.setLinkedin(artifacts[0]);
+                    round.setGithub(artifacts[1]);
+                    round.setLinkedin_panelist(mpnl.getPanelistLinkedIn(rs.getString(3)));
                     round.setStatus(rs.getString(13));
                     rounds.add(round);
                 }
@@ -118,7 +127,7 @@ public class ManageRounds {
                 round.setRound_synthetic_key(rs.getString(12));
                 mpnl=new ManagePanelist();
                 mo=new ManageOrganizer();
-                round.setPanelist_name(mpnl.getPanelistName(rs.getString(3)));
+                round.setPanelist_name(mpnl.getPanelistEmail(rs.getString(3)));
                 round.setOrganizer_name(mo.getOrganizerName(rs.getString(4)));
                 round.setStatus(rs.getString(13));
                 rounds.add(round);
@@ -258,7 +267,7 @@ public class ManageRounds {
                 round.setRound_synthetic_key(rs.getString(12));
                 mpnl=new ManagePanelist();
                 mo=new ManageOrganizer();
-                round.setPanelist_name(mpnl.getPanelistName(rs.getString(3)));
+                round.setPanelist_name(mpnl.getPanelistEmail(rs.getString(3)));
                 round.setOrganizer_name(mo.getOrganizerName(rs.getString(4)));
                 round.setStatus(rs.getString(13));
                 rounds.add(round);
